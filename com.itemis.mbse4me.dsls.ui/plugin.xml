@@ -1,0 +1,910 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+	<extension
+		point="org.eclipse.ui.editors">
+		<editor
+			class="com.itemis.mbse4me.dsls.ui.ErModelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+			contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+			default="true"
+			extensions="ermodel"
+			id="com.itemis.mbse4me.dsls.ErModel"
+			name="ErModel Editor">
+		</editor>
+	</extension>
+	<extension
+		point="org.eclipse.ui.handlers">
+		<handler
+			class="com.itemis.mbse4me.dsls.ui.ErModelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+			commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
+			<activeWhen>
+				<reference
+					definitionId="com.itemis.mbse4me.dsls.ErModel.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+		<handler
+			class="com.itemis.mbse4me.dsls.ui.ErModelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+			commandId="com.itemis.mbse4me.dsls.ErModel.validate">
+			<activeWhen>
+				<reference
+					definitionId="com.itemis.mbse4me.dsls.ErModel.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+		<!-- copy qualified name -->
+		<handler
+			class="com.itemis.mbse4me.dsls.ui.ErModelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedNameHandler"
+			commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName">
+			<activeWhen>
+				<reference definitionId="com.itemis.mbse4me.dsls.ErModel.Editor.opened" />
+			</activeWhen>
+		</handler>
+		<handler
+			class="com.itemis.mbse4me.dsls.ui.ErModelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedNameHandler"
+			commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName">
+			<activeWhen>
+				<and>
+					<reference definitionId="com.itemis.mbse4me.dsls.ErModel.XtextEditor.opened" />
+					<iterate>
+						<adapt type="org.eclipse.xtext.ui.editor.outline.IOutlineNode" />
+					</iterate>
+				</and>
+			</activeWhen>
+		</handler>
+	</extension>
+	<extension point="org.eclipse.core.expressions.definitions">
+		<definition id="com.itemis.mbse4me.dsls.ErModel.Editor.opened">
+			<and>
+				<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+				<with variable="activeEditor">
+					<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName"
+						value="com.itemis.mbse4me.dsls.ErModel"
+						forcePluginActivation="true"/>
+				</with>
+			</and>
+		</definition>
+		<definition id="com.itemis.mbse4me.dsls.ErModel.XtextEditor.opened">
+			<and>
+				<reference definitionId="isXtextEditorActive"/>
+				<with variable="activeEditor">
+					<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName"
+						value="com.itemis.mbse4me.dsls.ErModel"
+						forcePluginActivation="true"/>
+				</with>
+			</and>
+		</definition>
+	</extension>
+	<extension
+			point="org.eclipse.ui.preferencePages">
+		<page
+			class="com.itemis.mbse4me.dsls.ui.ErModelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+			id="com.itemis.mbse4me.dsls.ErModel"
+			name="ErModel">
+			<keywordReference id="com.itemis.mbse4me.dsls.ui.keyword_ErModel"/>
+		</page>
+		<page
+			category="com.itemis.mbse4me.dsls.ErModel"
+			class="com.itemis.mbse4me.dsls.ui.ErModelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+			id="com.itemis.mbse4me.dsls.ErModel.coloring"
+			name="Syntax Coloring">
+			<keywordReference id="com.itemis.mbse4me.dsls.ui.keyword_ErModel"/>
+		</page>
+		<page
+			category="com.itemis.mbse4me.dsls.ErModel"
+			class="com.itemis.mbse4me.dsls.ui.ErModelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+			id="com.itemis.mbse4me.dsls.ErModel.templates"
+			name="Templates">
+			<keywordReference id="com.itemis.mbse4me.dsls.ui.keyword_ErModel"/>
+		</page>
+	</extension>
+	<extension
+			point="org.eclipse.ui.propertyPages">
+		<page
+			class="com.itemis.mbse4me.dsls.ui.ErModelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+			id="com.itemis.mbse4me.dsls.ErModel"
+			name="ErModel">
+			<keywordReference id="com.itemis.mbse4me.dsls.ui.keyword_ErModel"/>
+			<enabledWhen>
+				<adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+			<filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+		</page>
+	</extension>
+	<extension
+		point="org.eclipse.ui.keywords">
+		<keyword
+			id="com.itemis.mbse4me.dsls.ui.keyword_ErModel"
+			label="ErModel"/>
+	</extension>
+	<extension
+		point="org.eclipse.ui.commands">
+		<command
+			description="Trigger expensive validation"
+			id="com.itemis.mbse4me.dsls.ErModel.validate"
+			name="Validate">
+		</command>
+		<!-- copy qualified name -->
+		<command
+			id="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
+			categoryId="org.eclipse.ui.category.edit"
+			description="Copy the qualified name for the selected element"
+			name="Copy Qualified Name">
+		</command>
+		<command
+			id="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName"
+			categoryId="org.eclipse.ui.category.edit"
+			description="Copy the qualified name for the selected element"
+			name="Copy Qualified Name">
+		</command>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=group.edit">
+			<command
+				commandId="com.itemis.mbse4me.dsls.ErModel.validate"
+				style="push"
+				tooltip="Trigger expensive validation">
+				<visibleWhen checkEnabled="false">
+					<reference
+						definitionId="com.itemis.mbse4me.dsls.ErModel.Editor.opened">
+					</reference>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+		<!-- copy qualified name -->
+		<menuContribution locationURI="popup:#TextEditorContext?after=copy">
+			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
+				style="push" tooltip="Copy Qualified Name">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="com.itemis.mbse4me.dsls.ErModel.Editor.opened" />
+				</visibleWhen>
+			</command>
+		</menuContribution>
+		<menuContribution locationURI="menu:edit?after=copy">
+			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
+				style="push" tooltip="Copy Qualified Name">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="com.itemis.mbse4me.dsls.ErModel.Editor.opened" />
+				</visibleWhen>
+			</command>
+		</menuContribution>
+		<menuContribution locationURI="popup:org.eclipse.xtext.ui.outline?after=additions">
+			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName"
+				style="push" tooltip="Copy Qualified Name">
+				<visibleWhen checkEnabled="false">
+					<and>
+						<reference definitionId="com.itemis.mbse4me.dsls.ErModel.XtextEditor.opened" />
+						<iterate>
+							<adapt type="org.eclipse.xtext.ui.editor.outline.IOutlineNode" />
+						</iterate>
+					</and>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
+			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="com.itemis.mbse4me.dsls.ErModel.Editor.opened">
+					</reference>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+		<handler
+			class="com.itemis.mbse4me.dsls.ui.ErModelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+			commandId="org.eclipse.xtext.ui.editor.FindReferences">
+			<activeWhen>
+				<reference
+					definitionId="com.itemis.mbse4me.dsls.ErModel.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="ermodel"
+			id="com.itemis.mbse4me.dsls.ErModel.contenttype"
+			name="ErModel File"
+			priority="normal">
+		</content-type>
+	</extension>
+	<!-- adding resource factories -->
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="com.itemis.mbse4me.dsls.ui.ErModelExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="ermodel">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+		<resourceServiceProvider
+			class="com.itemis.mbse4me.dsls.ui.ErModelExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+			uriExtension="ermodel">
+		</resourceServiceProvider>
+	</extension>
+	<!-- marker definitions for com.itemis.mbse4me.dsls.ErModel -->
+	<extension
+			id="ermodel.check.fast"
+			name="ErModel Problem"
+			point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.xtext.ui.check.fast"/>
+		<persistent value="true"/>
+	</extension>
+	<extension
+			id="ermodel.check.normal"
+			name="ErModel Problem"
+			point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.xtext.ui.check.normal"/>
+		<persistent value="true"/>
+	</extension>
+	<extension
+			id="ermodel.check.expensive"
+			name="ErModel Problem"
+			point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.xtext.ui.check.expensive"/>
+		<persistent value="true"/>
+	</extension>
+	<extension point="org.eclipse.ui.preferencePages">
+		<page
+			category="com.itemis.mbse4me.dsls.ErModel"
+			class="com.itemis.mbse4me.dsls.ui.ErModelExecutableExtensionFactory:org.eclipse.xtext.ui.validation.ValidatorPreferencePage"
+			id="com.itemis.mbse4me.dsls.ErModel.validator.preferencePage"
+			name="Errors/Warnings">
+			<keywordReference id="com.itemis.mbse4me.dsls.ui.keyword_ErModel"/>
+		</page>
+	</extension>
+	<extension point="org.eclipse.xtext.builder.participant">
+		<participant
+			class="com.itemis.mbse4me.dsls.ui.ErModelExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"
+			fileExtensions="ermodel"/>
+	</extension>
+	<extension point="org.eclipse.ui.preferencePages">
+		<page
+			category="com.itemis.mbse4me.dsls.ErModel"
+			class="com.itemis.mbse4me.dsls.ui.ErModelExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+			id="com.itemis.mbse4me.dsls.ErModel.compiler.preferencePage"
+			name="Compiler">
+			<keywordReference id="com.itemis.mbse4me.dsls.ui.keyword_ErModel"/>
+		</page>
+	</extension>
+	<extension point="org.eclipse.ui.propertyPages">
+		<page
+			category="com.itemis.mbse4me.dsls.ErModel"
+			class="com.itemis.mbse4me.dsls.ui.ErModelExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+			id="com.itemis.mbse4me.dsls.ErModel.compiler.propertyPage"
+			name="Compiler">
+			<keywordReference id="com.itemis.mbse4me.dsls.ui.keyword_ErModel"/>
+			<enabledWhen>
+				<adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+			<filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+		</page>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?after=xtext.ui.openDeclaration">
+			<command
+				commandId="org.eclipse.xtext.ui.OpenGeneratedFileCommand"
+				id="com.itemis.mbse4me.dsls.ErModel.OpenGeneratedCode"
+				style="push">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="com.itemis.mbse4me.dsls.ErModel.Editor.opened" />
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+		<handler
+			class="com.itemis.mbse4me.dsls.ui.ErModelExecutableExtensionFactory:org.eclipse.xtext.ui.generator.trace.OpenGeneratedFileHandler"
+			commandId="org.eclipse.xtext.ui.OpenGeneratedFileCommand">
+			<activeWhen>
+				<reference definitionId="com.itemis.mbse4me.dsls.ErModel.Editor.opened" />
+			</activeWhen>
+		</handler>
+	</extension>
+	<!-- Quick Outline -->
+	<extension
+		point="org.eclipse.ui.handlers">
+		<handler
+			class="com.itemis.mbse4me.dsls.ui.ErModelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
+			commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline">
+			<activeWhen>
+				<reference
+					definitionId="com.itemis.mbse4me.dsls.ErModel.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	<extension
+		point="org.eclipse.ui.commands">
+		<command
+			description="Open the quick outline."
+			id="org.eclipse.xtext.ui.editor.outline.QuickOutline"
+			name="Quick Outline">
+		</command>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline"
+				style="push"
+				tooltip="Open Quick Outline">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="com.itemis.mbse4me.dsls.ErModel.Editor.opened"/>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<!-- quickfix marker resolution generator for com.itemis.mbse4me.dsls.ErModel -->
+	<extension
+			point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator
+			class="com.itemis.mbse4me.dsls.ui.ErModelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+			markerType="com.itemis.mbse4me.dsls.ui.ermodel.check.fast">
+			<attribute
+				name="FIXABLE_KEY"
+				value="true">
+			</attribute>
+		</markerResolutionGenerator>
+		<markerResolutionGenerator
+			class="com.itemis.mbse4me.dsls.ui.ErModelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+			markerType="com.itemis.mbse4me.dsls.ui.ermodel.check.normal">
+			<attribute
+				name="FIXABLE_KEY"
+				value="true">
+			</attribute>
+		</markerResolutionGenerator>
+		<markerResolutionGenerator
+			class="com.itemis.mbse4me.dsls.ui.ErModelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+			markerType="com.itemis.mbse4me.dsls.ui.ermodel.check.expensive">
+			<attribute
+				name="FIXABLE_KEY"
+				value="true">
+			</attribute>
+		</markerResolutionGenerator>
+	</extension>
+	<!-- Rename Refactoring -->
+	<extension point="org.eclipse.ui.handlers">
+		<handler
+			class="com.itemis.mbse4me.dsls.ui.ErModelExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler"
+			commandId="org.eclipse.xtext.ui.refactoring.RenameElement">
+			<activeWhen>
+				<reference
+					definitionId="com.itemis.mbse4me.dsls.ErModel.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=group.edit">
+			<command commandId="org.eclipse.xtext.ui.refactoring.RenameElement"
+				style="push">
+				<visibleWhen checkEnabled="false">
+					<reference
+						definitionId="com.itemis.mbse4me.dsls.ErModel.Editor.opened">
+					</reference>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.preferencePages">
+		<page
+			category="com.itemis.mbse4me.dsls.ErModel"
+			class="com.itemis.mbse4me.dsls.ui.ErModelExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
+			id="com.itemis.mbse4me.dsls.ErModel.refactoring"
+			name="Refactoring">
+			<keywordReference id="com.itemis.mbse4me.dsls.ui.keyword_ErModel"/>
+		</page>
+	</extension>
+	<extension point="org.eclipse.compare.contentViewers">
+		<viewer id="com.itemis.mbse4me.dsls.ErModel.compare.contentViewers"
+			class="com.itemis.mbse4me.dsls.ui.ErModelExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+			extensions="ermodel">
+		</viewer>
+		<contentTypeBinding
+			contentTypeId="com.itemis.mbse4me.dsls.ErModel.contenttype"
+			contentViewerId="com.itemis.mbse4me.dsls.ErModel.compare.contentViewers" />
+	</extension>
+	<extension point="org.eclipse.compare.contentMergeViewers">
+		<viewer id="com.itemis.mbse4me.dsls.ErModel.compare.contentMergeViewers"
+			class="com.itemis.mbse4me.dsls.ui.ErModelExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+			extensions="ermodel" label="ErModel Compare">
+		</viewer>
+		<contentTypeBinding
+			contentTypeId="com.itemis.mbse4me.dsls.ErModel.contenttype"
+			contentMergeViewerId="com.itemis.mbse4me.dsls.ErModel.compare.contentMergeViewers" />
+	</extension>
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider id="com.itemis.mbse4me.dsls.ErModel.editors.documentProviders"
+			class="com.itemis.mbse4me.dsls.ui.ErModelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
+			extensions="ermodel">
+		</provider>
+	</extension>
+	<extension point="org.eclipse.team.core.fileTypes">
+		<fileTypes
+			extension="ermodel"
+			type="text">
+		</fileTypes>
+	</extension>
+	<extension
+		point="org.eclipse.ui.newWizards">
+		<category id="com.itemis.mbse4me.dsls.ui.category" name="ErModel">
+		</category>
+		<wizard
+			category="com.itemis.mbse4me.dsls.ui.category"
+			class="com.itemis.mbse4me.dsls.ui.ErModelExecutableExtensionFactory:com.itemis.mbse4me.dsls.ui.wizard.ErModelTemplateNewProjectWizard"
+			id="com.itemis.mbse4me.dsls.ui.wizard.ErModelNewProjectWizard"
+			name="ErModel Project"
+			icon="icons/new_ErModel_proj.gif"
+			project="true">
+		</wizard>
+	</extension>
+	<extension
+		point="org.eclipse.xtext.ui.projectTemplate">
+		<projectTemplateProvider
+			class="com.itemis.mbse4me.dsls.ui.ErModelExecutableExtensionFactory:com.itemis.mbse4me.dsls.ui.wizard.ErModelProjectTemplateProvider"
+			grammarName="com.itemis.mbse4me.dsls.ErModel">
+		</projectTemplateProvider>
+	</extension>
+	<extension
+		point="org.eclipse.ui.perspectiveExtensions">
+		<perspectiveExtension targetID="org.eclipse.ui.resourcePerspective">
+			<newWizardShortcut id="com.itemis.mbse4me.dsls.ui.wizard.ErModelNewProjectWizard"/>
+		</perspectiveExtension>
+		<perspectiveExtension targetID="org.eclipse.jdt.ui.JavaPerspective">
+			<newWizardShortcut id="com.itemis.mbse4me.dsls.ui.wizard.ErModelNewProjectWizard"/>
+		</perspectiveExtension>
+	</extension>
+	<extension
+		point="org.eclipse.ui.menus">
+		<menuContribution
+			allPopups="false"
+			locationURI="toolbar:org.eclipse.ui.main.toolbar">
+			<toolbar
+				id="com.itemis.mbse4me.dsls.ui.toolbar">
+				<!--
+					For some reason the tooltip is not shown when hovering over the toolbar button
+					See also https://www.eclipse.org/forums/index.php/t/1079111/
+				-->
+				<command
+					commandId="org.eclipse.ui.newWizard"
+					tooltip="Create a new ErModel project">
+					<parameter
+						name="newWizardId"
+						value="com.itemis.mbse4me.dsls.ui.wizard.ErModelNewProjectWizard">
+					</parameter>
+				</command>
+			</toolbar>
+		</menuContribution>
+	</extension>
+	<!-- code mining -->
+	<extension point="org.eclipse.ui.workbench.texteditor.codeMiningProviders">
+		<codeMiningProvider
+			class="com.itemis.mbse4me.dsls.ui.ErModelExecutableExtensionFactory:org.eclipse.jface.text.codemining.ICodeMiningProvider"
+			id="com.itemis.mbse4me.dsls.ErModel.CodeMiningProvider"
+			label="ErModel Codemining">
+			<enabledWhen>
+				<with variable="editorInput">
+					<adapt type="org.eclipse.core.resources.IFile">
+						<test
+							property="org.eclipse.core.resources.contentTypeId"
+							value="com.itemis.mbse4me.dsls.ErModel.contenttype">
+						</test>
+					</adapt>
+				</with>
+			</enabledWhen>
+		</codeMiningProvider>
+	</extension>
+	<extension
+		point="org.eclipse.ui.editors">
+		<editor
+			class="com.itemis.mbse4me.dsls.ui.RequirementExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+			contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+			default="true"
+			extensions="requirement"
+			id="com.itemis.mbse4me.dsls.Requirement"
+			name="Requirement Editor">
+		</editor>
+	</extension>
+	<extension
+		point="org.eclipse.ui.handlers">
+		<handler
+			class="com.itemis.mbse4me.dsls.ui.RequirementExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+			commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
+			<activeWhen>
+				<reference
+					definitionId="com.itemis.mbse4me.dsls.Requirement.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+		<handler
+			class="com.itemis.mbse4me.dsls.ui.RequirementExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+			commandId="com.itemis.mbse4me.dsls.Requirement.validate">
+			<activeWhen>
+				<reference
+					definitionId="com.itemis.mbse4me.dsls.Requirement.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+		<!-- copy qualified name -->
+		<handler
+			class="com.itemis.mbse4me.dsls.ui.RequirementExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedNameHandler"
+			commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName">
+			<activeWhen>
+				<reference definitionId="com.itemis.mbse4me.dsls.Requirement.Editor.opened" />
+			</activeWhen>
+		</handler>
+		<handler
+			class="com.itemis.mbse4me.dsls.ui.RequirementExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedNameHandler"
+			commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName">
+			<activeWhen>
+				<and>
+					<reference definitionId="com.itemis.mbse4me.dsls.Requirement.XtextEditor.opened" />
+					<iterate>
+						<adapt type="org.eclipse.xtext.ui.editor.outline.IOutlineNode" />
+					</iterate>
+				</and>
+			</activeWhen>
+		</handler>
+	</extension>
+	<extension point="org.eclipse.core.expressions.definitions">
+		<definition id="com.itemis.mbse4me.dsls.Requirement.Editor.opened">
+			<and>
+				<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+				<with variable="activeEditor">
+					<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName"
+						value="com.itemis.mbse4me.dsls.Requirement"
+						forcePluginActivation="true"/>
+				</with>
+			</and>
+		</definition>
+		<definition id="com.itemis.mbse4me.dsls.Requirement.XtextEditor.opened">
+			<and>
+				<reference definitionId="isXtextEditorActive"/>
+				<with variable="activeEditor">
+					<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName"
+						value="com.itemis.mbse4me.dsls.Requirement"
+						forcePluginActivation="true"/>
+				</with>
+			</and>
+		</definition>
+	</extension>
+	<extension
+			point="org.eclipse.ui.preferencePages">
+		<page
+			class="com.itemis.mbse4me.dsls.ui.RequirementExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+			id="com.itemis.mbse4me.dsls.Requirement"
+			name="Requirement">
+			<keywordReference id="com.itemis.mbse4me.dsls.ui.keyword_Requirement"/>
+		</page>
+		<page
+			category="com.itemis.mbse4me.dsls.Requirement"
+			class="com.itemis.mbse4me.dsls.ui.RequirementExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+			id="com.itemis.mbse4me.dsls.Requirement.coloring"
+			name="Syntax Coloring">
+			<keywordReference id="com.itemis.mbse4me.dsls.ui.keyword_Requirement"/>
+		</page>
+		<page
+			category="com.itemis.mbse4me.dsls.Requirement"
+			class="com.itemis.mbse4me.dsls.ui.RequirementExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+			id="com.itemis.mbse4me.dsls.Requirement.templates"
+			name="Templates">
+			<keywordReference id="com.itemis.mbse4me.dsls.ui.keyword_Requirement"/>
+		</page>
+	</extension>
+	<extension
+			point="org.eclipse.ui.propertyPages">
+		<page
+			class="com.itemis.mbse4me.dsls.ui.RequirementExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+			id="com.itemis.mbse4me.dsls.Requirement"
+			name="Requirement">
+			<keywordReference id="com.itemis.mbse4me.dsls.ui.keyword_Requirement"/>
+			<enabledWhen>
+				<adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+			<filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+		</page>
+	</extension>
+	<extension
+		point="org.eclipse.ui.keywords">
+		<keyword
+			id="com.itemis.mbse4me.dsls.ui.keyword_Requirement"
+			label="Requirement"/>
+	</extension>
+	<extension
+		point="org.eclipse.ui.commands">
+		<command
+			description="Trigger expensive validation"
+			id="com.itemis.mbse4me.dsls.Requirement.validate"
+			name="Validate">
+		</command>
+		<!-- copy qualified name -->
+		<command
+			id="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
+			categoryId="org.eclipse.ui.category.edit"
+			description="Copy the qualified name for the selected element"
+			name="Copy Qualified Name">
+		</command>
+		<command
+			id="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName"
+			categoryId="org.eclipse.ui.category.edit"
+			description="Copy the qualified name for the selected element"
+			name="Copy Qualified Name">
+		</command>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=group.edit">
+			<command
+				commandId="com.itemis.mbse4me.dsls.Requirement.validate"
+				style="push"
+				tooltip="Trigger expensive validation">
+				<visibleWhen checkEnabled="false">
+					<reference
+						definitionId="com.itemis.mbse4me.dsls.Requirement.Editor.opened">
+					</reference>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+		<!-- copy qualified name -->
+		<menuContribution locationURI="popup:#TextEditorContext?after=copy">
+			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
+				style="push" tooltip="Copy Qualified Name">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="com.itemis.mbse4me.dsls.Requirement.Editor.opened" />
+				</visibleWhen>
+			</command>
+		</menuContribution>
+		<menuContribution locationURI="menu:edit?after=copy">
+			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
+				style="push" tooltip="Copy Qualified Name">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="com.itemis.mbse4me.dsls.Requirement.Editor.opened" />
+				</visibleWhen>
+			</command>
+		</menuContribution>
+		<menuContribution locationURI="popup:org.eclipse.xtext.ui.outline?after=additions">
+			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName"
+				style="push" tooltip="Copy Qualified Name">
+				<visibleWhen checkEnabled="false">
+					<and>
+						<reference definitionId="com.itemis.mbse4me.dsls.Requirement.XtextEditor.opened" />
+						<iterate>
+							<adapt type="org.eclipse.xtext.ui.editor.outline.IOutlineNode" />
+						</iterate>
+					</and>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
+			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="com.itemis.mbse4me.dsls.Requirement.Editor.opened">
+					</reference>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+		<handler
+			class="com.itemis.mbse4me.dsls.ui.RequirementExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+			commandId="org.eclipse.xtext.ui.editor.FindReferences">
+			<activeWhen>
+				<reference
+					definitionId="com.itemis.mbse4me.dsls.Requirement.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type
+			base-type="org.eclipse.core.runtime.text"
+			file-extensions="requirement"
+			id="com.itemis.mbse4me.dsls.Requirement.contenttype"
+			name="Requirement File"
+			priority="normal">
+		</content-type>
+	</extension>
+	<!-- adding resource factories -->
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="com.itemis.mbse4me.dsls.ui.RequirementExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="requirement">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+		<resourceServiceProvider
+			class="com.itemis.mbse4me.dsls.ui.RequirementExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+			uriExtension="requirement">
+		</resourceServiceProvider>
+	</extension>
+	<!-- marker definitions for com.itemis.mbse4me.dsls.Requirement -->
+	<extension
+			id="requirement.check.fast"
+			name="Requirement Problem"
+			point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.xtext.ui.check.fast"/>
+		<persistent value="true"/>
+	</extension>
+	<extension
+			id="requirement.check.normal"
+			name="Requirement Problem"
+			point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.xtext.ui.check.normal"/>
+		<persistent value="true"/>
+	</extension>
+	<extension
+			id="requirement.check.expensive"
+			name="Requirement Problem"
+			point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.xtext.ui.check.expensive"/>
+		<persistent value="true"/>
+	</extension>
+	<extension point="org.eclipse.ui.preferencePages">
+		<page
+			category="com.itemis.mbse4me.dsls.Requirement"
+			class="com.itemis.mbse4me.dsls.ui.RequirementExecutableExtensionFactory:org.eclipse.xtext.ui.validation.ValidatorPreferencePage"
+			id="com.itemis.mbse4me.dsls.Requirement.validator.preferencePage"
+			name="Errors/Warnings">
+			<keywordReference id="com.itemis.mbse4me.dsls.ui.keyword_Requirement"/>
+		</page>
+	</extension>
+	<extension point="org.eclipse.xtext.builder.participant">
+		<participant
+			class="com.itemis.mbse4me.dsls.ui.RequirementExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"
+			fileExtensions="requirement"/>
+	</extension>
+	<extension point="org.eclipse.ui.preferencePages">
+		<page
+			category="com.itemis.mbse4me.dsls.Requirement"
+			class="com.itemis.mbse4me.dsls.ui.RequirementExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+			id="com.itemis.mbse4me.dsls.Requirement.compiler.preferencePage"
+			name="Compiler">
+			<keywordReference id="com.itemis.mbse4me.dsls.ui.keyword_Requirement"/>
+		</page>
+	</extension>
+	<extension point="org.eclipse.ui.propertyPages">
+		<page
+			category="com.itemis.mbse4me.dsls.Requirement"
+			class="com.itemis.mbse4me.dsls.ui.RequirementExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+			id="com.itemis.mbse4me.dsls.Requirement.compiler.propertyPage"
+			name="Compiler">
+			<keywordReference id="com.itemis.mbse4me.dsls.ui.keyword_Requirement"/>
+			<enabledWhen>
+				<adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+			<filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+		</page>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?after=xtext.ui.openDeclaration">
+			<command
+				commandId="org.eclipse.xtext.ui.OpenGeneratedFileCommand"
+				id="com.itemis.mbse4me.dsls.Requirement.OpenGeneratedCode"
+				style="push">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="com.itemis.mbse4me.dsls.Requirement.Editor.opened" />
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+		<handler
+			class="com.itemis.mbse4me.dsls.ui.RequirementExecutableExtensionFactory:org.eclipse.xtext.ui.generator.trace.OpenGeneratedFileHandler"
+			commandId="org.eclipse.xtext.ui.OpenGeneratedFileCommand">
+			<activeWhen>
+				<reference definitionId="com.itemis.mbse4me.dsls.Requirement.Editor.opened" />
+			</activeWhen>
+		</handler>
+	</extension>
+	<!-- Quick Outline -->
+	<extension
+		point="org.eclipse.ui.handlers">
+		<handler
+			class="com.itemis.mbse4me.dsls.ui.RequirementExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
+			commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline">
+			<activeWhen>
+				<reference
+					definitionId="com.itemis.mbse4me.dsls.Requirement.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	<extension
+		point="org.eclipse.ui.commands">
+		<command
+			description="Open the quick outline."
+			id="org.eclipse.xtext.ui.editor.outline.QuickOutline"
+			name="Quick Outline">
+		</command>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline"
+				style="push"
+				tooltip="Open Quick Outline">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="com.itemis.mbse4me.dsls.Requirement.Editor.opened"/>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<!-- Rename Refactoring -->
+	<extension point="org.eclipse.ui.handlers">
+		<handler
+			class="com.itemis.mbse4me.dsls.ui.RequirementExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler"
+			commandId="org.eclipse.xtext.ui.refactoring.RenameElement">
+			<activeWhen>
+				<reference
+					definitionId="com.itemis.mbse4me.dsls.Requirement.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=group.edit">
+			<command commandId="org.eclipse.xtext.ui.refactoring.RenameElement"
+				style="push">
+				<visibleWhen checkEnabled="false">
+					<reference
+						definitionId="com.itemis.mbse4me.dsls.Requirement.Editor.opened">
+					</reference>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.preferencePages">
+		<page
+			category="com.itemis.mbse4me.dsls.Requirement"
+			class="com.itemis.mbse4me.dsls.ui.RequirementExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
+			id="com.itemis.mbse4me.dsls.Requirement.refactoring"
+			name="Refactoring">
+			<keywordReference id="com.itemis.mbse4me.dsls.ui.keyword_Requirement"/>
+		</page>
+	</extension>
+	<extension point="org.eclipse.compare.contentViewers">
+		<viewer id="com.itemis.mbse4me.dsls.Requirement.compare.contentViewers"
+			class="com.itemis.mbse4me.dsls.ui.RequirementExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+			extensions="requirement">
+		</viewer>
+		<contentTypeBinding
+			contentTypeId="com.itemis.mbse4me.dsls.Requirement.contenttype"
+			contentViewerId="com.itemis.mbse4me.dsls.Requirement.compare.contentViewers" />
+	</extension>
+	<extension point="org.eclipse.compare.contentMergeViewers">
+		<viewer id="com.itemis.mbse4me.dsls.Requirement.compare.contentMergeViewers"
+			class="com.itemis.mbse4me.dsls.ui.RequirementExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+			extensions="requirement" label="Requirement Compare">
+		</viewer>
+		<contentTypeBinding
+			contentTypeId="com.itemis.mbse4me.dsls.Requirement.contenttype"
+			contentMergeViewerId="com.itemis.mbse4me.dsls.Requirement.compare.contentMergeViewers" />
+	</extension>
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider id="com.itemis.mbse4me.dsls.Requirement.editors.documentProviders"
+			class="com.itemis.mbse4me.dsls.ui.RequirementExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
+			extensions="requirement">
+		</provider>
+	</extension>
+	<extension point="org.eclipse.team.core.fileTypes">
+		<fileTypes
+			extension="requirement"
+			type="text">
+		</fileTypes>
+	</extension>
+	<extension point="net.sourceforge.plantuml.eclipse.diagramTextProvider">
+		<diagramTextProvider
+			providerClass="com.itemis.mbse4me.dsls.ui.ErModelExecutableExtensionFactory:com.itemis.mbse4me.dsls.ui.plantuml.ErModelPlantUMLDiagramTextProvider">
+		</diagramTextProvider>
+	</extension>
+</plugin>

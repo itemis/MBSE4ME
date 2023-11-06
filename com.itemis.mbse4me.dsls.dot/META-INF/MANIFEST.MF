@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Dot
+Bundle-SymbolicName: com.itemis.mbse4me.dsls.dot;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: ITEMIS
+Automatic-Module-Name: com.itemis.mbse4me.dsls.dot
+Bundle-RequiredExecutionEnvironment: JavaSE-17
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.ui,
+ net.sourceforge.plantuml.eclipse;bundle-version="1.1.29"

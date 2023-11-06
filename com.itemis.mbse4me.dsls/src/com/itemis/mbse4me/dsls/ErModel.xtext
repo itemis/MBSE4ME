@@ -1,0 +1,31 @@
+grammar com.itemis.mbse4me.dsls.ErModel with org.eclipse.xtext.common.Terminals
+
+generate erModel "http://www.itemis.com/mbse4me/dsls/ErModel"
+
+ModelContainer returns ModelContainer:
+	('Products' '{' products += Product ( "," products += Product)* '}')?
+	('Assemblies' '{' assemblies+= Assembly ( "," assemblies += Assembly)* '}')?
+	('Components' '{' components+=Component ( "," components+=Component)* '}')?
+;
+
+Product returns Product:
+	'Product' name = STRING 'ID' id=STRING 'uses' '{' (assemblyUsages += AssemblyUsage)? ( "," assemblyUsages += AssemblyUsage)* '}'
+;
+
+Assembly returns Assembly:
+	'Assembly' name = STRING 'ID' id=STRING 'uses' '{' (componentUsages += ComponentUsage)? ( "," componentUsages += ComponentUsage)* '}'
+;
+
+Component returns Component:
+	'Component' name = STRING 'ID' id=STRING 'costs' price=STRING
+;
+
+AssemblyUsage returns AssemblyUsage:
+	count = INT ("piece" | "pieces") "of"
+	assembly = [Assembly | STRING]
+;
+
+ComponentUsage returns ComponentUsage:
+	count = INT ("piece" | "pieces") "of"
+	component = [Component | STRING]
+;

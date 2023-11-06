@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde?>
+<!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
+<target name="com.itemis.mbse4me.dsls" sequenceNumber="1699341274">
+  <locations>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
+      <unit id="org.eclipse.justj.openjdk.hotspot.jre.full.feature.group" version="17.0.9.v20231028-0858"/>
+      <repository location="https://ftp-stud.hs-esslingen.de/Mirrors/eclipse/justj/jres/17/updates/release"/>
+    </location>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
+      <unit id="org.eclipse.emf.feature.group" version="2.35.0.v20230829-0934"/>
+      <unit id="org.eclipse.emf.sdk.feature.group" version="2.35.0.v20230829-0934"/>
+      <unit id="org.eclipse.emf.ecore" version="2.35.0.v20230829-0934"/>
+      <unit id="org.eclipse.sdk.ide" version="4.29.0.I20230903-1000"/>
+      <unit id="org.eclipse.uml2.sdk.feature.group" version="5.5.3.v20221116-1811"/>
+      <unit id="org.eclipse.xtext.sdk.feature.group" version="2.32.0.v20230827-1315"/>
+      <unit id="org.eclipse.xtend.sdk.feature.group" version="2.32.0.v20230827-1315"/>
+      <repository id="eclipse" location="https://ftp-stud.hs-esslingen.de/Mirrors/eclipse/releases/2023-09/202309131000/"/>
+    </location>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
+      <unit id="com.google.guava" version="30.1.0.v20221112-0806"/>
+      <unit id="com.google.inject" version="5.0.1.v20221112-0806"/>
+      <unit id="com.google.gson" version="2.10.1.v20230109-0753"/>
+      <unit id="org.apache.commons.compress" version="1.22.0.v20221207-1049"/>
+      <unit id="org.apache.poi" version="4.1.1.v20221112-0806"/>
+      <unit id="org.apache.poi.ooxml" version="4.1.1.v20221112-0806"/>
+      <unit id="org.apache.poi.ooxml.schemas" version="4.1.1.v20221112-0806"/>
+      <unit id="org.apache.xmlbeans" version="3.1.0.v20221112-0806"/>
+      <repository id="eclipse-orbit" location="https://download.eclipse.org/tools/orbit/downloads/drops/R20230531010532/repository"/>
+    </location>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
+      <unit id="org.eclipse.equinox.executable.feature.group" version="3.8.2200.v20230717-2134"/>
+      <repository id="equinoxexecutable" location="https://ftp-stud.hs-esslingen.de/Mirrors/eclipse/eclipse/updates/4.29/"/>
+    </location>
+    <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
+      <unit id="net.sourceforge.plantuml.ecore.feature.feature.group" version="1.1.30"/>
+      <unit id="net.sourceforge.plantuml.feature.feature.group" version="1.1.30"/>
+      <unit id="net.sourceforge.plantuml.eclipse" version="1.1.30"/>
+      <unit id="net.sourceforge.plantuml.lib.feature.feature.group" version="1.2023.11"/>
+      <unit id="net.sourceforge.plantuml.lib.elk.feature.feature.group" version="0.7.1"/>
+      <unit id="net.sourceforge.plantuml.jdt" version="1.1.30"/>
+      <repository location="http://hallvard.github.io/plantuml/"/>
+    </location>
+  </locations>
+</target>

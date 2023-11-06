@@ -1,0 +1,12 @@
+grammar com.itemis.mbse4me.dsls.Requirement with org.eclipse.xtext.common.Terminals
+
+generate requirement "http://www.itemis.com/mbse4me/dsls/Requirement"
+
+Requirement:
+	'Number:' number=STRING
+	'Text:' text=MULTILINE_STRING
+;
+
+terminal MULTILINE_STRING:
+	"'''" -> "'''"
+;
