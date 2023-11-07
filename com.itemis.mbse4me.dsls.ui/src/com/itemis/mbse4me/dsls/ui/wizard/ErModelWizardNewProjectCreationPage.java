@@ -32,9 +32,9 @@ public class ErModelWizardNewProjectCreationPage extends WizardNewProjectCreatio
 		Control control = getControl();
 		if (control instanceof Composite) {
 			Composite composite = (Composite) control;
-			createExcelFileGUI(composite, 0, "Anforderungen (*.xlsx):");
-			createExcelFileGUI(composite, 1, "CAD Daten (*.xlsx):");
-			createExcelFileGUI(composite, 2, "Preis Daten (*.xlsx):");
+			createExcelFileGUI(composite, 0, "Requirements (*.xlsx):");
+			createExcelFileGUI(composite, 1, "CAD Data (*.xlsx):");
+			createExcelFileGUI(composite, 2, "Price Data (*.xlsx):");
 		}
 	}
 

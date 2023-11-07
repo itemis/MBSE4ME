@@ -25,9 +25,9 @@ import com.itemis.mbse4me.dsls.ui.wizard.ErModelTemplateNewProjectWizard
 class ErModelNewProjectWizardTest extends AbstractWorkbenchTest {
 
 	val static excelFilePathStrings = #[
-		"..\\com.itemis.mbse4me.dsls.tests\\resources\\TDSE_Anforderungen_001.xlsx",
-		"..\\com.itemis.mbse4me.dsls.tests\\resources\\TDSE_CAD_Daten_001.xlsx",
-		"..\\com.itemis.mbse4me.dsls.tests\\resources\\TDSE_Preis_Daten_001.xlsx"
+		"..\\com.itemis.mbse4me.dsls.tests\\resources\\Requirements_001.xlsx",
+		"..\\com.itemis.mbse4me.dsls.tests\\resources\\CAD_Data_001.xlsx",
+		"..\\com.itemis.mbse4me.dsls.tests\\resources\\Price_Data_001.xlsx"
 	]
 
 	@Inject Provider<ErModelTestableNewProjectWizard> wizardProvider

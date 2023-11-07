@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals
 class ErModelExcelImporterTest {
 
 	@Test def test001() {
-		#["resources\\TDSE_Anforderungen_001.xlsx", "resources\\TDSE_CAD_Daten_001.xlsx", "resources\\TDSE_Preis_Daten_001.xlsx"].assertImportedTo(#[
+		#["resources\\Requirements_001.xlsx", "resources\\CAD_Data_001.xlsx", "resources\\Price_Data_001.xlsx"].assertImportedTo(#[
 			'''
 			Number: "1.1"
 			Text:«c»
