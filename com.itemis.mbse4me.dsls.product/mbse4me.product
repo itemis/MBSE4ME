@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="Model-based Systems Engineering for Mechanical Engineering Modeling IDE" uid="MBSE4MEModelingIDE" id="MBSE4MEModelingIDE.product" application="org.eclipse.ui.ide.workbench" type="bundles" includeLaunchers="true" autoIncludeRequirements="true">
+<product name="MBSE4ME Modeling IDE" uid="MBSE4MEModelingIDE" id="com.itemis.mbse4me.dsls.product.product" application="org.eclipse.ui.ide.workbench" type="bundles" includeLaunchers="true" autoIncludeRequirements="true">
 
    <aboutInfo>
       <text>
-         Version 0.0.0.20231107
+         Version 0.0.0.20231020
       </text>
    </aboutInfo>
 
@@ -35,6 +35,7 @@
       <windows include="true">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17</windows>
    </vm>
 
+
    <plugins>
       <plugin id="bcpg"/>
       <plugin id="bcprov"/>
@@ -44,14 +45,25 @@
       <plugin id="com.google.guava.failureaccess"/>
       <plugin id="com.google.inject" version="7.0.0"/>
       <plugin id="com.ibm.icu"/>
+      <plugin id="com.itemis.mbse4me.dsls"/>
+      <plugin id="com.itemis.mbse4me.dsls.dot"/>
+      <plugin id="com.itemis.mbse4me.dsls.ide"/>
+      <plugin id="com.itemis.mbse4me.dsls.product"/>
+      <plugin id="com.itemis.mbse4me.dsls.sysml"/>
+      <plugin id="com.itemis.mbse4me.dsls.sysml.ui"/>
+      <plugin id="com.itemis.mbse4me.dsls.ui"/>
       <plugin id="com.jcraft.jsch"/>
       <plugin id="com.sun.jna"/>
       <plugin id="com.sun.jna.platform"/>
       <plugin id="io.github.classgraph"/>
+      <plugin id="jakarta.annotation-api"/>
       <plugin id="jakarta.inject.jakarta.inject-api"/>
       <plugin id="jakarta.servlet-api"/>
       <plugin id="javax.annotation"/>
       <plugin id="javax.inject"/>
+      <plugin id="junit-platform-commons"/>
+      <plugin id="junit-platform-engine"/>
+      <plugin id="junit-platform-launcher"/>
       <plugin id="net.sourceforge.plantuml.eclipse"/>
       <plugin id="net.sourceforge.plantuml.eclipse.imagecontrol"/>
       <plugin id="net.sourceforge.plantuml.lib"/>
@@ -84,13 +96,8 @@
       <plugin id="org.apache.xmlbeans"/>
       <plugin id="org.apache.xmlgraphics"/>
       <plugin id="org.apiguardian.api"/>
-      <plugin id="com.itemis.mbse4me.dsls"/>
-      <plugin id="com.itemis.mbse4me.dsls.dot"/>
-      <plugin id="com.itemis.mbse4me.dsls.ide"/>
-      <plugin id="com.itemis.mbse4me.dsls.sysml"/>
-      <plugin id="com.itemis.mbse4me.dsls.sysml.ui"/>
-      <plugin id="com.itemis.mbse4me.dsls.ui"/>
-      <plugin id="com.itemis.mbse4me.dsls.product"/>
+      <plugin id="org.bouncycastle.bcpg"/>
+      <plugin id="org.bouncycastle.bcprov"/>
       <plugin id="org.eclipse.ant.core"/>
       <plugin id="org.eclipse.compare"/>
       <plugin id="org.eclipse.compare.core"/>
@@ -250,6 +257,7 @@
       <plugin id="org.eclipse.xtext.builder"/>
       <plugin id="org.eclipse.xtext.builder.standalone"/>
       <plugin id="org.eclipse.xtext.common.types"/>
+      <plugin id="org.eclipse.xtext.common.types.edit"/>
       <plugin id="org.eclipse.xtext.common.types.ui"/>
       <plugin id="org.eclipse.xtext.ecore"/>
       <plugin id="org.eclipse.xtext.ide"/>
@@ -265,11 +273,15 @@
       <plugin id="org.eclipse.xtext.xbase"/>
       <plugin id="org.eclipse.xtext.xbase.ide"/>
       <plugin id="org.eclipse.xtext.xbase.lib"/>
+      <plugin id="org.hamcrest"/>
+      <plugin id="org.hamcrest.core"/>
+      <plugin id="org.junit"/>
       <plugin id="org.objectweb.asm"/>
       <plugin id="org.objectweb.asm.commons"/>
       <plugin id="org.objectweb.asm.tree"/>
       <plugin id="org.objectweb.asm.tree.analysis"/>
       <plugin id="org.objectweb.asm.util"/>
+      <plugin id="org.opentest4j"/>
       <plugin id="org.osgi.service.cm"/>
       <plugin id="org.osgi.service.component"/>
       <plugin id="org.osgi.service.device"/>

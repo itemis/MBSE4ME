@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            name="MBSE4ME Modeling IDE"
+            application="org.eclipse.ui.ide.workbench">
+         <property
+               name="appName"
+               value="MBSE4ME Modeling IDE">
+         </property>
+         <property
+               name="aboutText"
+               value="Version 0.0.0.20231020">
+         </property>
+      </product>
+   </extension>
+
+</plugin>
