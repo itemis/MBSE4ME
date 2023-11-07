@@ -9,7 +9,9 @@ import java.util.Map;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Model;
+import org.eclipse.uml2.uml.Package;
 
 import com.itemis.mbse4me.dsls.erModel.Assembly;
 import com.itemis.mbse4me.dsls.erModel.Component;
