@@ -129,7 +129,7 @@ class ErModelPlantUMLConverterTest {
 			protocol "Product 22222222 1" {
 				Product 1
 			}
-			"Component 00000000 1" --> "1 pieces" "Assembly 11111111 1"
+			"Component 00000000 1" --> "1 piece" "Assembly 11111111 1"
 			"Assembly 11111111 1" --> "2 pieces" "Product 22222222 1"
 		''')
 	}

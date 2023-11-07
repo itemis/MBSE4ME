@@ -8,6 +8,7 @@ import com.itemis.mbse4me.dsls.erModel.AssemblyUsage;
 import com.itemis.mbse4me.dsls.erModel.Component;
 import com.itemis.mbse4me.dsls.erModel.ComponentUsage;
 import com.itemis.mbse4me.dsls.erModel.Product;
+import com.itemis.mbse4me.dsls.utils.StringUtils;
 
 public class ExcelImporter {
 
@@ -72,7 +73,7 @@ public class ExcelImporter {
 			sb.append("\tAssembly \"" + assembly.getName() + "\" ID \"" + assembly.getId() + "\" uses {" + System.lineSeparator());
 			sb.append("\t\t");
 			for (ComponentUsage componentUsage : assembly.getComponentUsages()) {
-				sb.append(componentUsage.getCount() + " pieces of \"" + componentUsage.getComponent().getId() + "\", ");
+				sb.append(StringUtils.getPieceOrPieces(componentUsage.getCount()) + " of \"" + componentUsage.getComponent().getId() + "\", ");
 			}
 			sb.deleteCharAt(sb.length() - 1); // delete the last unnecessary whitespace
 			sb.deleteCharAt(sb.length() - 1); // delete the last unnecessary comma
@@ -96,7 +97,7 @@ public class ExcelImporter {
 			sb.append("\tProduct \"" + product.getName() + "\" ID \"" + product.getId() + "\" uses {" + System.lineSeparator());
 			sb.append("\t\t");
 			for (AssemblyUsage assemblyUsage : product.getAssemblyUsages()) {
-				sb.append(assemblyUsage.getCount() + " pieces of \"" + assemblyUsage.getAssembly().getId() + "\", ");
+				sb.append(StringUtils.getPieceOrPieces(assemblyUsage.getCount()) + " of \"" + assemblyUsage.getAssembly().getId() + "\", ");
 			}
 			sb.deleteCharAt(sb.length() - 1); // delete the last unnecessary whitespace
 			sb.deleteCharAt(sb.length() - 1); // delete the last unnecessary comma

@@ -46,7 +46,7 @@ class ErModelExcelImporterTest {
 			'''
 			Assemblies {
 				Assembly "ASSEMBLY 1" ID "11111111 1" uses {
-					1 pieces of "00000000 1", 2 pieces of "00000000 2"
+					1 piece of "00000000 1", 2 pieces of "00000000 2"
 				},
 				Assembly "ASSEMBLY 2" ID "11111111 2" uses {
 					3 pieces of "00000000 2", 4 pieces of "00000000 3"
@@ -59,10 +59,10 @@ class ErModelExcelImporterTest {
 			'''
 			Products {
 				Product "Product 1" ID "22222222 1" uses {
-					1 pieces of "11111111 1", 1 pieces of "11111111 2"
+					1 piece of "11111111 1", 1 piece of "11111111 2"
 				},
 				Product "Product 2" ID "22222222 2" uses {
-					1 pieces of "11111111 2", 1 pieces of "11111111 3"
+					1 piece of "11111111 2", 1 piece of "11111111 3"
 				}
 			}
 		''')

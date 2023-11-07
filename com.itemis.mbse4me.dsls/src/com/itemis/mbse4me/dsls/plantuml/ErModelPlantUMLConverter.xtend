@@ -7,6 +7,8 @@ import com.itemis.mbse4me.dsls.erModel.Product
 import java.util.List
 import org.eclipse.emf.ecore.resource.ResourceSet
 
+import static extension com.itemis.mbse4me.dsls.utils.StringUtils.getPieceOrPieces
+
 /**
  * Converts a DSL model to a PlantUML representation.
  */
@@ -36,12 +38,12 @@ class ErModelPlantUMLConverter {
 			«ENDFOR»
 			«FOR assembly : allAssemblies»
 				«FOR componentUsage: assembly.componentUsages»
-					"Component «componentUsage.component.id»" --> "«componentUsage.count» pieces" "Assembly «assembly.id»"
+					"Component «componentUsage.component.id»" --> "«componentUsage.count.getPieceOrPieces»" "Assembly «assembly.id»"
 				«ENDFOR»
 			«ENDFOR»
 			«FOR product : allProducts»
 				«FOR assemblyUsage: product.assemblyUsages»
-					"Assembly «assemblyUsage.assembly.id»" --> "«assemblyUsage.count» pieces" "Product «product.id»"
+					"Assembly «assemblyUsage.assembly.id»" --> "«assemblyUsage.count.getPieceOrPieces»" "Product «product.id»"
 				«ENDFOR»
 			«ENDFOR»
 		'''
