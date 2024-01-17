@@ -45,7 +45,7 @@ public class SysMLExportHandler {
 			IProject selectedProject = (IProject) selection.getFirstElement();
 			var modelContainers = getModelContainersFromSelectedProject(selectedProject);
 			if (modelContainers.isEmpty()) {
-				MessageDialog.openError(s, "SysML Export", "No ErModel models found!");
+				MessageDialog.openWarning(s, "SysML Export", "No models found!");
 				return;
 			}
 			var requirements = getRequirementsFromSelectedProject(selectedProject);
@@ -56,19 +56,24 @@ public class SysMLExportHandler {
 		}
 	}
 
-	private List<Requirement> getRequirementsFromSelectedProject(IProject project) throws CoreException{
+	private List<Requirement> getRequirementsFromSelectedProject(IProject project) throws CoreException {
 		var retval = new ArrayList<Requirement>();
 		RequirementStandaloneSetup setup = new RequirementStandaloneSetup();
 		var injector = setup.createInjectorAndDoEMFRegistration();
 		var rset = injector.getInstance(ResourceSet.class);
 		var requirementsFolder = project.getFolder("requirements");
+		if (!requirementsFolder.exists()) {
+			return retval;
+		}
 		for (var file : requirementsFolder.members()) {
 			if (file.getFileExtension().equals("requirement")) {
 				// get the resources out of the file
 				Resource resource = rset.getResource(URI.createURI(file.getFullPath().toString()), true);
-				var rootNode = resource.getContents().get(0);
-				if (rootNode instanceof Requirement reqSpec) {
-					retval.add(reqSpec);
+				if (!resource.getContents().isEmpty()) {
+					var rootNode = resource.getContents().get(0);
+					if (rootNode instanceof Requirement reqSpec) {
+						retval.add(reqSpec);
+					}
 				}
 			}
 		}
@@ -85,9 +90,11 @@ public class SysMLExportHandler {
 			if (member instanceof IFile && member.getFileExtension().equals("ermodel")) {
 				// get the resources out of the file
 				Resource resource = rset.getResource(URI.createURI(member.getFullPath().toString()), true);
-				var rootNode = resource.getContents().get(0);
-				if (rootNode instanceof ModelContainer modelContainer) {
-					result.add(modelContainer);
+				if (!resource.getContents().isEmpty()) {
+					var rootNode = resource.getContents().get(0);
+					if (rootNode instanceof ModelContainer modelContainer) {
+						result.add(modelContainer);
+					}
 				}
 			}
 		}

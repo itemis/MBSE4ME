@@ -69,7 +69,6 @@ public class ErModelSysmlTransformer {
 			var reqClass = requirementsPack.createOwnedClass(String.format("Requirement_%s", reqId), false);
 			reqClass.createOwnedAttribute("Requirement Text", null).setStringDefaultValue(reqText);
 			CameoProfileUtils.applySysMLStereotype(reqClass, "Block");
-			CameoProfileUtils.applyImpaktStereotype(reqClass, "Requirement");
 		});
 		monitor.setTaskName("Creating components");
 		Map<Component, Class> componentsToSysmlBlocks = new HashMap<>();
@@ -80,7 +79,6 @@ public class ErModelSysmlTransformer {
 			createdComponent.createOwnedAttribute("PLM_ID", null).setStringDefaultValue(c.getId());
 			createdComponent.createOwnedAttribute("Price", null).setStringDefaultValue(c.getPrice());
 			CameoProfileUtils.applySysMLStereotype(createdComponent, "Block");
-			CameoProfileUtils.applyImpaktStereotype(createdComponent, "HardwareComponent");
 			componentsToSysmlBlocks.put(c, createdComponent);
 		});
 		monitor.worked(40);
@@ -89,7 +87,6 @@ public class ErModelSysmlTransformer {
 			var createdAssembly = assembliesPack.createOwnedClass(assembly.getName(), false);
 			createdAssembly.createOwnedAttribute("PLM_ID", null).setStringDefaultValue(assembly.getId());
 			CameoProfileUtils.applySysMLStereotype(createdAssembly, "Block");
-			CameoProfileUtils.applyImpaktStereotype(createdAssembly, "VariantProductComponent");
 			// get the components included in this assembly
 			assembly.getComponentUsages().stream().forEach(usedComponent -> {
 				var sysmlComponent = componentsToSysmlBlocks.get(usedComponent.getComponent());
@@ -111,7 +108,6 @@ public class ErModelSysmlTransformer {
 		products.forEach(r -> {
 			var createdTrack = productsPack.createOwnedClass(r.getName(), false);
 			CameoProfileUtils.applySysMLStereotype(createdTrack, "Block");
-			CameoProfileUtils.applyImpaktStereotype(createdTrack, "Product");
 			createdTrack.createOwnedAttribute("PLM_ID", null).setStringDefaultValue(r.getId());
 			var trackPrice = r.getAssemblyUsages().stream().map(bgv -> assembliesToComputedPrice.get(bgv.getAssembly())).reduce((double) 0, (subtotal, price) -> subtotal + price);
 			createdTrack.createOwnedAttribute("Price", null).setStringDefaultValue(trackPrice.toString());
