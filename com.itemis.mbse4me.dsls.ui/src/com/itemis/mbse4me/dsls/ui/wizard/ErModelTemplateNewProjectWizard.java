@@ -24,11 +24,12 @@ public class ErModelTemplateNewProjectWizard extends TemplateNewProjectWizard {
 
 			String[] excelFilePathStrings = mainPage.getExcelFilePathStrings();
 
-			if (!containsNull(excelFilePathStrings)) {
+			if (!containsNull(excelFilePathStrings) && excelFilePathStrings.length !=0) {
 				projectImportedFromExcel.setExcelFilePathStrings(excelFilePathStrings);
 			}
+				super.doFinish(projectInfo, monitor);				
+			
 
-			super.doFinish(projectInfo, monitor);
 		}
 	}
 
