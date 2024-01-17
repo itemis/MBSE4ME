@@ -10,4 +10,11 @@ Require-Bundle: org.apache.felix.scr;bundle-version="2.1.24",
  org.eclipse.equinox.registry,
  org.eclipse.swt,
  org.eclipse.ui.workbench,
- org.eclipse.jface
+ org.eclipse.jface,
+ com.itemis.mbse4me.dsls;bundle-version="1.0.0",
+ com.itemis.mbse4me.dsls.dot;bundle-version="1.0.0",
+ com.itemis.mbse4me.dsls.ide;bundle-version="1.0.0",
+ com.itemis.mbse4me.dsls.sysml;bundle-version="1.0.0",
+ com.itemis.mbse4me.dsls.sysml.ui;bundle-version="1.0.0",
+ com.itemis.mbse4me.dsls.ui;bundle-version="1.0.0",
+ org.eclipse.xtext;bundle-version="2.32.0"
