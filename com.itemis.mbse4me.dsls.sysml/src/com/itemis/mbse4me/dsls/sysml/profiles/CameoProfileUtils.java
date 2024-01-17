@@ -29,17 +29,13 @@ public class CameoProfileUtils {
 			model.setName(modelName);
 			resource.getContents().add(model);
 			final Profile sysmlProfile = getSysMLProfileFromResource(project, set);
-			final Profile impaktProfile = getImpaktProfileFromResource(project, set);
 
 			model.applyProfile(sysmlProfile);
-			model.applyProfile(impaktProfile);
 			resource.getContents().add(sysmlProfile);
-			resource.getContents().add(impaktProfile);
 
 			var newSet = new ResourceSetImpl();
 			var reloadedSysmlProfile = getSysMLProfileFromResource(project, newSet);
 			model.createPackageImport(reloadedSysmlProfile);
-			model.createPackageImport(impaktProfile);
 			resource.getContents().add(reloadedSysmlProfile);
 
 			return model;
@@ -51,7 +47,6 @@ public class CameoProfileUtils {
 
 	private static void copySysMLProfilesToContainer(IProject project) {
 		FileUtils.copyFileToContainer(project, CameoSysMLProfileConstants.SYSML_STANDARD_PROFILE_URL, true);
-		FileUtils.copyFileToContainer(project, CameoSysMLProfileConstants.IMPAKT_PROFILE_URL, true);
 		FileUtils.copyFileToContainer(project, CameoSysMLProfileConstants.SYSML_STANDARD_PROFILE_EXTENSION1_URL, true);
 		FileUtils.copyFileToContainer(project, CameoSysMLProfileConstants.SYSML_STANDARD_PROFILE_EXTENSION2_URL, true);
 		FileUtils.copyFileToContainer(project, CameoSysMLProfileConstants.SYSML_STANDARD_PROFILE_EXTENSION3_URL, true);
@@ -77,16 +72,6 @@ public class CameoProfileUtils {
 		return profile;
 	}
 
-	private static Profile getImpaktProfileFromResource(IProject project, final ResourceSetImpl set) {
-		// apply the SyML profile to the entire model
-		final URI sysmlProfileUri = URI.createPlatformResourceURI(
-				project.getFile(CameoSysMLProfileConstants.IMPAKT_PROFILE_FILE).getFullPath().toString(), false);
-		final Resource profileResource = set.getResource(sysmlProfileUri, true);
-		final Profile profile = find(profileResource, Profile.class,
-				p -> CameoSysMLProfileConstants.IMPAKT_PROFILE_NAME.equals(p.getName()));
-		return profile;
-	}
-
 	public static Stereotype applySysMLStereotype(Element element, String stereotypeToApply) {
 		// get the SysML profile
 		Model model = (Model) element.eResource().getContents().get(0);
@@ -95,18 +80,6 @@ public class CameoProfileUtils {
 				.orElse(null);
 		element.getNearestPackage().applyProfile(appliedSysMLProfile);
 		var stereotype = find(appliedSysMLProfile, Stereotype.class, s -> stereotypeToApply.equals(s.getName()));
-		element.applyStereotype(stereotype);
-		return stereotype;
-	}
-
-	public static Stereotype applyImpaktStereotype(Element element, String stereotypeToApply) {
-		// get the SysML profile
-		Model model = (Model) element.eResource().getContents().get(0);
-		var appliedImpaktProfile = model.getAllAppliedProfiles().stream()
-				.filter(p -> p.getName().equals(CameoSysMLProfileConstants.IMPAKT_PROFILE_NAME)).findFirst()
-				.orElse(null);
-		element.getNearestPackage().applyProfile(appliedImpaktProfile);
-		var stereotype = find(appliedImpaktProfile, Stereotype.class, s -> stereotypeToApply.equals(s.getName()));
 		element.applyStereotype(stereotype);
 		return stereotype;
 	}
