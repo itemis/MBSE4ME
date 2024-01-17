@@ -1,5 +1,6 @@
 package com.itemis.mbse4me.dsls.importer;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -20,10 +21,10 @@ public class ExcelImporter {
 	private Map<String, Assembly> assemblies;
 	private Map<String, Product> products;
 
-	private String componentsModelContainer;
-	private String assembliesModelContainer;
-	private String productsModelContainer;
-	private List<String> requirements;
+	private String componentsModelContainer = "";
+	private String assembliesModelContainer = "";
+	private String productsModelContainer = "";
+	private List<String> requirements = new ArrayList<>();
 
 	public ExcelImporter() {
 		requirementExcelFileReader = new RequirementExcelFileReader();
@@ -32,6 +33,9 @@ public class ExcelImporter {
 	}
 
 	public void importDataFrom(String[] excelFilePathStrings) {
+		if (excelFilePathStrings == null || excelFilePathStrings.length == 0) {
+			return;
+		}
 		String reqSpecExcelFile = excelFilePathStrings[0];
 		requirements = requirementExcelFileReader.readDataFrom(reqSpecExcelFile);
 
