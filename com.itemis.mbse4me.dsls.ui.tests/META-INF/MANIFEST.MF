@@ -6,7 +6,8 @@ Bundle-Vendor: My Company
 Bundle-Version: 1.0.0.qualifier
 Bundle-SymbolicName: com.itemis.mbse4me.dsls.ui.tests; singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: com.itemis.mbse4me.dsls.ui,
+Require-Bundle: com.itemis.mbse4me.dsls,
+ com.itemis.mbse4me.dsls.ui,
  org.eclipse.xtext.testing,
  org.eclipse.xtext.ui.testing,
  org.eclipse.xtext.xbase.testing,

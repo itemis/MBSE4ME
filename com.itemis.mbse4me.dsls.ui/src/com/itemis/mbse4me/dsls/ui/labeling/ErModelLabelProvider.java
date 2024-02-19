@@ -3,6 +3,7 @@
  */
 package com.itemis.mbse4me.dsls.ui.labeling;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 
@@ -41,5 +42,9 @@ public class ErModelLabelProvider extends DefaultEObjectLabelProvider {
 			text += "s";
 		}
 		return ErModelUiUtils.style(text);
+	}
+
+	Object image(EObject eObject) {
+		return eObject.eClass().getName() + ".png";
 	}
 }

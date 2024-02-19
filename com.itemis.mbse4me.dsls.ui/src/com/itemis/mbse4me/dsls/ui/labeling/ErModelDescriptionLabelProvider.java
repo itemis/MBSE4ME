@@ -3,23 +3,18 @@
  */
 package com.itemis.mbse4me.dsls.ui.labeling;
 
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider;
 
 /**
  * Provides labels for IEObjectDescriptions and IResourceDescriptions.
- * 
+ *
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#label-provider
  */
 public class ErModelDescriptionLabelProvider extends DefaultDescriptionLabelProvider {
 
-	// Labels and icons can be computed like this:
-//	@Override
-//	public String text(IEObjectDescription ele) {
-//		return ele.getName().toString();
-//	}
-//	
-//	@Override
-//	public String image(IEObjectDescription ele) {
-//		return ele.getEClass().getName() + ".gif";
-//	}
+	@Override
+	public String image(IEObjectDescription element) {
+		return element.getEClass().getName() + ".png";
+	}
 }
