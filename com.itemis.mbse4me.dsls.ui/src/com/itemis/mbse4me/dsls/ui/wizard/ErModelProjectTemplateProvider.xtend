@@ -36,9 +36,9 @@ final class ProjectImportedFromExcel {
 			location = projectInfo.locationPath
 			projectNatures += #[XtextProjectHelper.NATURE_ID]
 			builderIds += #[XtextProjectHelper.BUILDER_ID]
-			addFile('''Components.ermodel''', excelImporter.getComponentsModelContainer)
-			addFile('''Assemblies.ermodel''', excelImporter.getAssembliesModelContainer)
-			addFile('''Products.ermodel''', excelImporter.getProductsModelContainer)
+			addFile('''components.ermodel''', excelImporter.getComponentsModelContainer)
+			addFile('''assemblies.ermodel''', excelImporter.getAssembliesModelContainer)
+			addFile('''products.ermodel''', excelImporter.getProductsModelContainer)
 			var i = 1
 			for (requestSpec : excelImporter.requirement) {
 				addFile('''requirements/«i.withLeadingZeros».requirement''', requestSpec)
