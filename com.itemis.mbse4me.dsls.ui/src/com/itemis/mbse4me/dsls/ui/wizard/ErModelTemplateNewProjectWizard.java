@@ -11,11 +11,13 @@ public class ErModelTemplateNewProjectWizard extends TemplateNewProjectWizard {
 
 	private ErModelWizardNewProjectCreationPage mainPage;
 
+	@Override
 	protected WizardNewProjectCreationPage createMainPage(String pageName) {
 		mainPage = new ErModelWizardNewProjectCreationPage(pageName);
 		return mainPage;
 	}
 
+	@Override
 	protected void doFinish(final IProjectInfo projectInfo, final IProgressMonitor monitor) {
 		TemplateProjectInfo templateProjectInfo = (TemplateProjectInfo) projectInfo;
 		AbstractProjectTemplate projectTemplate = templateProjectInfo.getProjectTemplate();
@@ -27,9 +29,7 @@ public class ErModelTemplateNewProjectWizard extends TemplateNewProjectWizard {
 			if (!containsNull(excelFilePathStrings) && excelFilePathStrings.length !=0) {
 				projectImportedFromExcel.setExcelFilePathStrings(excelFilePathStrings);
 			}
-				super.doFinish(projectInfo, monitor);				
-			
-
+			super.doFinish(projectInfo, monitor);
 		}
 	}
 
@@ -41,5 +41,4 @@ public class ErModelTemplateNewProjectWizard extends TemplateNewProjectWizard {
 		}
 		return false;
 	}
-
 }
