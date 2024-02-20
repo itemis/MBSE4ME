@@ -1,5 +1,6 @@
 package com.itemis.mbse4me.dsls.ui.wizard;
 
+import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -93,4 +94,8 @@ public class ErModelWizardNewProjectCreationPage extends WizardNewProjectCreatio
 		return excelFilePathStrings;
 	}
 
+	@Override
+	public IWizardPage getNextPage() {
+		return null;
+	}
 }

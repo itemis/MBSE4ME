@@ -41,4 +41,10 @@ public class ErModelTemplateNewProjectWizard extends TemplateNewProjectWizard {
 		}
 		return false;
 	}
+
+	@Override
+	public boolean needsPreviousAndNextButtons() {
+		return false;
+	}
+
 }
