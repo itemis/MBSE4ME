@@ -55,9 +55,9 @@ public class ErModelWizardNewProjectCreationPage extends WizardNewProjectCreatio
 
 		// browse button
 		Button browseButton = new Button(group, SWT.PUSH);
-		browseButton.setText("Durchsuchen...");
+		browseButton.setText("Browse...");
 		GridData buttonGridData = new GridData();
-		buttonGridData.widthHint = 150;
+		buttonGridData.widthHint = 92;
 		browseButton.setLayoutData(buttonGridData);
 		browseButton.addSelectionListener(new SelectionAdapter() {
 			@Override
