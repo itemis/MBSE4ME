@@ -129,7 +129,7 @@ public class ExcelImporter {
 		return productsModelContainer;
 	}
 
-	public List<String> getRequirement() {
+	public List<String> getRequirements() {
 		return requirements;
 	}
 }

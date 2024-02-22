@@ -67,21 +67,25 @@ public class ErModelOutlineTreeProvider extends DefaultOutlineTreeProvider {
 			Component component = (Component) modelElement;
 			EObjectNode eObjectNode = new EObjectNode(modelElement, parentNode, image, text, isLeaf);
 			INode parserNode = getComponentNameNode(component);
-			if (parserNode != null)
+			if (parserNode != null) {
 				eObjectNode.setTextRegion(parserNode.getTextRegion());
-			if (isLocalElement(parentNode, modelElement))
+			}
+			if (isLocalElement(parentNode, modelElement)) {
 				eObjectNode.setShortTextRegion(parserNode.getTextRegion());
+			}
 			return eObjectNode;
 		}
 
 		if (modelElement instanceof Assembly) {
-			Assembly bauteil = (Assembly) modelElement;
+			Assembly assembly = (Assembly) modelElement;
 			EObjectNode eObjectNode = new EObjectNode(modelElement, parentNode, image, text, isLeaf);
-			INode parserNode = getAssemblyNameNode(bauteil);
-			if (parserNode != null)
+			INode parserNode = getAssemblyNameNode(assembly);
+			if (parserNode != null) {
 				eObjectNode.setTextRegion(parserNode.getTextRegion());
-			if (isLocalElement(parentNode, modelElement))
+			}
+			if (isLocalElement(parentNode, modelElement)) {
 				eObjectNode.setShortTextRegion(parserNode.getTextRegion());
+			}
 			return eObjectNode;
 		}
 
@@ -96,8 +100,8 @@ public class ErModelOutlineTreeProvider extends DefaultOutlineTreeProvider {
 			parserNode = getAssemblyInProductNode(product, index);
 		}
 		if (parentEObject instanceof Assembly) {
-			Assembly bauteil = (Assembly) parentEObject;
-			parserNode = getComponentInAssemblyNode(bauteil, index);
+			Assembly assembly = (Assembly) parentEObject;
+			parserNode = getComponentInAssemblyNode(assembly, index);
 		}
 		if (parserNode != null) {
 			eObjectNode.setTextRegion(parserNode.getTextRegion());
@@ -118,7 +122,7 @@ public class ErModelOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	private INode getAssemblyNameNode(Assembly assembly) {
 		List<INode> assemblyNameNodes = NodeModelUtils.findNodesForFeature(assembly, ErModelPackage.Literals.ASSEMBLY__NAME);
 		if (assemblyNameNodes.size() != 1) {
-			System.err.println("Exact 1 node is expected for the baugruppe name: "	+ assembly.getName() + ", but got " + assemblyNameNodes.size());
+			System.err.println("Exact 1 node is expected for the assembly name: "	+ assembly.getName() + ", but got " + assemblyNameNodes.size());
 			return null;
 		}
 		return assemblyNameNodes.get(0);

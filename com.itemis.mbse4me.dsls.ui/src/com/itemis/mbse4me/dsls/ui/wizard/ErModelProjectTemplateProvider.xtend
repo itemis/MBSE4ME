@@ -40,8 +40,8 @@ final class ProjectImportedFromExcel {
 			addFile('''assemblies.ermodel''', excelImporter.getAssembliesModelContainer)
 			addFile('''products.ermodel''', excelImporter.getProductsModelContainer)
 			var i = 1
-			for (requestSpec : excelImporter.requirement) {
-				addFile('''requirements/«i.withLeadingZeros».requirement''', requestSpec)
+			for (requirement : excelImporter.requirements) {
+				addFile('''requirements/«i.withLeadingZeros».requirement''', requirement)
 				i++
 			}
 		])

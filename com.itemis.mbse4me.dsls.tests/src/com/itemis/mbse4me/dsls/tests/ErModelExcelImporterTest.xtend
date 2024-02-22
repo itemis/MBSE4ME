@@ -68,25 +68,25 @@ class ErModelExcelImporterTest {
 		''')
 	}
 
-	private def void assertImportedTo(String[] excelFileNames, String[] expectedRequestSpecifications, String expectedKomponenten, String expectedBaugruppen, String expectedRaupen) {
+	private def void assertImportedTo(String[] excelFileNames, String[] expectedRequirements, String expectedComponents, String expectedAssemblies, String expectedProducts) {
 		val excelImporter = new ExcelImporter
 
 		excelImporter.importDataFrom(excelFileNames)
 
-		val actualRequestSpecifications = excelImporter.requirement
+		val actualRequirements = excelImporter.requirements
 
-		for(var i=0; i < expectedRequestSpecifications.size; i++) {
-			val actualRequestSpecification = actualRequestSpecifications.get(i)
-			val expectedRequestSpecification = expectedRequestSpecifications.get(i)
-			assertEquals(expectedRequestSpecification, actualRequestSpecification)
+		for(var i=0; i < expectedRequirements.size; i++) {
+			val actualRequirement = actualRequirements.get(i)
+			val expectedRequirement = expectedRequirements.get(i)
+			assertEquals(expectedRequirement, actualRequirement)
 		}
 
-		val actualKomponenten = excelImporter.getComponentsModelContainer
-		val actualBaugruppen = excelImporter.getAssembliesModelContainer
-		val actualRaupen = excelImporter.getProductsModelContainer
+		val actualComponents = excelImporter.getComponentsModelContainer
+		val actualAssemblies = excelImporter.getAssembliesModelContainer
+		val actualProducts = excelImporter.getProductsModelContainer
 
-		assertEquals(expectedKomponenten, actualKomponenten)
-		assertEquals(expectedBaugruppen, actualBaugruppen)
-		assertEquals(expectedRaupen, actualRaupen)
+		assertEquals(expectedComponents, actualComponents)
+		assertEquals(expectedAssemblies, actualAssemblies)
+		assertEquals(expectedProducts, actualProducts)
 	}
 }
