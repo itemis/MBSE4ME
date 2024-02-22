@@ -44,7 +44,8 @@ public class ErModelOutlineTreeProvider extends DefaultOutlineTreeProvider {
 			String text = assemblyUsage.getCount() + " of " + assembly.getId() + " - " + assembly.getName();
 			StyledString styledString = ErModelUiUtils.style(text);
 			Image image = imageDispatcher.invoke(assembly);
-			createCustomEObjectNode(parent, product, i, image, styledString, true);
+			EObjectNode assemblyNode = createCustomEObjectNode(parent, product, i, image, styledString, false);
+			_createChildren(assemblyNode, assembly);
 			i++;
 		}
 	}
@@ -103,7 +104,7 @@ public class ErModelOutlineTreeProvider extends DefaultOutlineTreeProvider {
 			Assembly assembly = (Assembly) parentEObject;
 			parserNode = getComponentInAssemblyNode(assembly, index);
 		}
-		if (parserNode != null) {
+		if (parserNode != null && isLocalElement(eObjectNode, parentEObject)) {
 			eObjectNode.setTextRegion(parserNode.getTextRegion());
 			eObjectNode.setShortTextRegion(parserNode.getTextRegion());
 		}
