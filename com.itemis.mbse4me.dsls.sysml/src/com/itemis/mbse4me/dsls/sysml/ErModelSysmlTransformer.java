@@ -134,17 +134,17 @@ public class ErModelSysmlTransformer {
 	}
 
 	private Package getOrCreateComponentsPackage(Model transformedModel) {
-		var pack = transformedModel.getNestedPackage(TransformedImpaktModelConstants.IMPAKT_COMPONENTS_PACKAGE);
-		return pack != null ? pack : transformedModel.createNestedPackage(TransformedImpaktModelConstants.IMPAKT_COMPONENTS_PACKAGE);
+		var pack = transformedModel.getNestedPackage(TransformedModelConstants.COMPONENTS_PACKAGE);
+		return pack != null ? pack : transformedModel.createNestedPackage(TransformedModelConstants.COMPONENTS_PACKAGE);
 	}
 
 	private Package getOrCreateAssembliesPackage(Model transformedModel) {
-		var pack = transformedModel.getNestedPackage(TransformedImpaktModelConstants.IMPAKT_ASSEMBLIES_PACKAGE);
-		return pack != null ? pack : transformedModel.createNestedPackage(TransformedImpaktModelConstants.IMPAKT_ASSEMBLIES_PACKAGE);
+		var pack = transformedModel.getNestedPackage(TransformedModelConstants.ASSEMBLIES_PACKAGE);
+		return pack != null ? pack : transformedModel.createNestedPackage(TransformedModelConstants.ASSEMBLIES_PACKAGE);
 	}
 
 	private Package getOrCreateProductsPackage(Model transformedModel) {
-		var pack = transformedModel.getNestedPackage(TransformedImpaktModelConstants.IMPAKT_TRACKS_PACKAGE);
-		return pack != null ? pack : transformedModel.createNestedPackage(TransformedImpaktModelConstants.IMPAKT_TRACKS_PACKAGE);
+		var pack = transformedModel.getNestedPackage(TransformedModelConstants.PRODUCTS_PACKAGE);
+		return pack != null ? pack : transformedModel.createNestedPackage(TransformedModelConstants.PRODUCTS_PACKAGE);
 	}
 }
