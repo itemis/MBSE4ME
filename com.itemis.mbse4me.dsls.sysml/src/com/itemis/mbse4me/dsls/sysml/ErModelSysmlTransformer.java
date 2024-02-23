@@ -21,24 +21,17 @@ import com.itemis.mbse4me.dsls.requirement.Requirement;
 import com.itemis.mbse4me.dsls.sysml.profiles.CameoProfileUtils;
 import com.itemis.mbse4me.dsls.utils.UnicodeConstants;
 
-public class ErModelSysmlTransformer {
+public class ErModelSysmlTransformer implements IErModelToSysMLTransformer {
 
-	private final IProject modelingProject;
-	private final String outputModelName;
-
-	private final List<String> transformationIssues = new ArrayList<>();
-	private final List<ModelContainer> modelContainersToTransform;
-	private final List<Requirement> requirementsToTransform;
+	private List<String> transformationIssues = new ArrayList<>();
+	private List<ModelContainer> modelContainersToTransform;
+	private List<Requirement> requirementsToTransform;
 	private Model transformedModel;
 
-	public ErModelSysmlTransformer(List<ModelContainer> modelsToTransform, List<Requirement> requirements, IProject modelingProject, String outputModelName) {
+	public void transform(List<ModelContainer> modelsToTransform, List<Requirement> requirements, IProject modelingProject, String outputModelName, IProgressMonitor progressMonitor) throws IOException {
 		this.modelContainersToTransform = modelsToTransform;
 		this.requirementsToTransform = requirements;
-		this.modelingProject = modelingProject;
-		this.outputModelName = outputModelName;
-	}
 
-	public void transform(IProgressMonitor progressMonitor) throws IOException {
 		progressMonitor.beginTask("Copying Cameo Profiles and creating models", 100);
 		transformedModel = CameoProfileUtils.createModelAndCopyProfiles(modelingProject, outputModelName);
 		progressMonitor.worked(20);
