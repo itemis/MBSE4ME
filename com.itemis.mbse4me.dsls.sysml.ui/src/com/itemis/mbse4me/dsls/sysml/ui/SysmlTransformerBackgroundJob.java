@@ -13,7 +13,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import com.itemis.mbse4me.dsls.erModel.ModelContainer;
 import com.itemis.mbse4me.dsls.requirement.Requirement;
-import com.itemis.mbse4me.dsls.sysml.ErModelSysmlTransformer;
+import com.itemis.mbse4me.dsls.sysml.ErModelToSysMLTransformer;
 import com.itemis.mbse4me.dsls.sysml.IErModelToSysMLTransformer;
 
 public class SysmlTransformerBackgroundJob extends Job {
@@ -43,7 +43,7 @@ public class SysmlTransformerBackgroundJob extends Job {
 
 	@Override
 	protected IStatus run(IProgressMonitor monitor) {
-		IErModelToSysMLTransformer sysmlTransformer = new ErModelSysmlTransformer();
+		IErModelToSysMLTransformer sysmlTransformer = new ErModelToSysMLTransformer();
 		try {
 			sysmlTransformer.transform(modelContainers, requirements, modellingProject, outputModelName, monitor);
 			operationStatus = Status.OK_STATUS;

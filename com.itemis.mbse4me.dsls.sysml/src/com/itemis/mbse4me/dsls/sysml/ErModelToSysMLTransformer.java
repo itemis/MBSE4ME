@@ -21,7 +21,7 @@ import com.itemis.mbse4me.dsls.requirement.Requirement;
 import com.itemis.mbse4me.dsls.sysml.profiles.CameoProfileUtils;
 import com.itemis.mbse4me.dsls.utils.UnicodeConstants;
 
-public class ErModelSysmlTransformer implements IErModelToSysMLTransformer {
+public class ErModelToSysMLTransformer implements IErModelToSysMLTransformer {
 
 	private List<String> transformationIssues = new ArrayList<>();
 	private List<ModelContainer> modelContainersToTransform;
