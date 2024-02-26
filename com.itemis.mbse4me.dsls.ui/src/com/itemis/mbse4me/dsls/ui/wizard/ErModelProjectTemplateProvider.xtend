@@ -1,11 +1,11 @@
 package com.itemis.mbse4me.dsls.ui.wizard
 
+import com.itemis.mbse4me.dsls.importer.ExcelImporter
 import org.eclipse.xtext.ui.XtextProjectHelper
 import org.eclipse.xtext.ui.util.ProjectFactory
 import org.eclipse.xtext.ui.wizard.template.IProjectGenerator
 import org.eclipse.xtext.ui.wizard.template.IProjectTemplateProvider
 import org.eclipse.xtext.ui.wizard.template.ProjectTemplate
-import com.itemis.mbse4me.dsls.importer.ExcelImporter
 
 /**
  * Create a list with all project templates to be shown in the template new project wizard.

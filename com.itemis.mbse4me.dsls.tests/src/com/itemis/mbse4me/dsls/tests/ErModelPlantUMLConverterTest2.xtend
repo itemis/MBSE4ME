@@ -3,6 +3,7 @@ package com.itemis.mbse4me.dsls.tests
 import com.google.inject.Inject
 import com.google.inject.Provider
 import com.itemis.mbse4me.dsls.erModel.ModelContainer
+import com.itemis.mbse4me.dsls.plantuml.ErModelPlantUMLConverter
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.testing.InjectWith
@@ -12,7 +13,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.^extension.ExtendWith
 
 import static org.junit.jupiter.api.Assertions.assertEquals
-import com.itemis.mbse4me.dsls.plantuml.ErModelPlantUMLConverter
 
 /**
  * Test cases for the {@link com.itemis.mbse4me.dsls.plantuml.ErModelPlantUMLConverter} class.

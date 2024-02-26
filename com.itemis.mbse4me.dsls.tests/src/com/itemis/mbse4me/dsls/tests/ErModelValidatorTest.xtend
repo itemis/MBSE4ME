@@ -1,7 +1,9 @@
 package com.itemis.mbse4me.dsls.tests
 
 import com.google.inject.Inject
+import com.itemis.mbse4me.dsls.erModel.ErModelPackage
 import com.itemis.mbse4me.dsls.erModel.ModelContainer
+import com.itemis.mbse4me.dsls.validation.ErModelIssueCodes
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.extensions.InjectionExtension
 import org.eclipse.xtext.testing.util.ParseHelper
@@ -10,8 +12,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.^extension.ExtendWith
 
 import static extension org.junit.jupiter.api.Assertions.assertEquals
-import com.itemis.mbse4me.dsls.erModel.ErModelPackage
-import com.itemis.mbse4me.dsls.validation.ErModelIssueCodes
 
 /**
  * Test cases for the {@link com.itemis.mbse4me.dsls.validation.ErModelValidator} class.

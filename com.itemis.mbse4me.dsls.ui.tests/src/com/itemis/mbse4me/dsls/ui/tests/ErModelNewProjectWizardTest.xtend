@@ -2,6 +2,7 @@ package com.itemis.mbse4me.dsls.ui.tests
 
 import com.google.inject.Inject
 import com.google.inject.Provider
+import com.itemis.mbse4me.dsls.ui.wizard.ErModelTemplateNewProjectWizard
 import com.itemis.mbse4me.dsls.ui.wizard.ProjectImportedFromExcel
 import org.eclipse.jface.viewers.StructuredSelection
 import org.eclipse.jface.wizard.Wizard
@@ -15,7 +16,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.^extension.ExtendWith
 
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
-import com.itemis.mbse4me.dsls.ui.wizard.ErModelTemplateNewProjectWizard
 
 /**
  * Test cases for the {@link com.itemis.mbse4me.dsls.ui.wizard.ErModelTemplateNewProjectWizard} class.
