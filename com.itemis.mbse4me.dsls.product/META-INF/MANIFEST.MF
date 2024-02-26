@@ -5,16 +5,16 @@ Bundle-SymbolicName: com.itemis.mbse4me.dsls.product;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Automatic-Module-Name: com.itemis.mbse4me.dsls.product
 Bundle-RequiredExecutionEnvironment: JavaSE-17
-Require-Bundle: org.apache.felix.scr;bundle-version="2.1.24",
- org.eclipse.ui.ide.application;bundle-version="1.4.300",
- org.eclipse.equinox.registry,
- org.eclipse.swt,
- org.eclipse.ui.workbench,
- org.eclipse.jface,
+Require-Bundle: com.itemis.mbse4me.dsls.dot;bundle-version="1.0.0",
  com.itemis.mbse4me.dsls;bundle-version="1.0.0",
- com.itemis.mbse4me.dsls.dot;bundle-version="1.0.0",
  com.itemis.mbse4me.dsls.ide;bundle-version="1.0.0",
  com.itemis.mbse4me.dsls.sysml;bundle-version="1.0.0",
  com.itemis.mbse4me.dsls.sysml.ui;bundle-version="1.0.0",
  com.itemis.mbse4me.dsls.ui;bundle-version="1.0.0",
+ org.apache.felix.scr;bundle-version="2.1.24",
+ org.eclipse.equinox.registry,
+ org.eclipse.jface,
+ org.eclipse.swt,
+ org.eclipse.ui.ide.application;bundle-version="1.4.300",
+ org.eclipse.ui.workbench,
  org.eclipse.xtext;bundle-version="2.32.0"

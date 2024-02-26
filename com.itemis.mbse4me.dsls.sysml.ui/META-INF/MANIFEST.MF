@@ -7,10 +7,10 @@ Bundle-Vendor: ITEMIS
 Automatic-Module-Name: com.itemis.mbse4me.dsls.sysml.ui
 Bundle-RequiredExecutionEnvironment: JavaSE-17
 Require-Bundle: com.google.inject,
- javax.inject,
  com.itemis.mbse4me.dsls,
  com.itemis.mbse4me.dsls.sysml;bundle-version="1.0.0",
  com.itemis.mbse4me.dsls.ui,
+ javax.inject,
  org.eclipse.core.resources,
  org.eclipse.core.runtime;bundle-version="3.24.100",
  org.eclipse.e4.core.di,

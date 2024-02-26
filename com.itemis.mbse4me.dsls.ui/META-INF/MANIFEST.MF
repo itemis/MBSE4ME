@@ -8,21 +8,21 @@ Bundle-SymbolicName: com.itemis.mbse4me.dsls.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: com.itemis.mbse4me.dsls,
  com.itemis.mbse4me.dsls.ide,
- org.eclipse.xtext.ui,
- org.eclipse.xtext.ui.shared,
- org.eclipse.xtext.ui.codetemplates.ui,
- org.eclipse.ui.editors;bundle-version="3.14.300",
- org.eclipse.ui.ide;bundle-version="3.18.500",
- org.eclipse.jdt.core,
- org.eclipse.xtend.lib,
- org.eclipse.ui,
- org.eclipse.core.runtime,
+ net.sourceforge.plantuml.eclipse,
  org.eclipse.compare,
- org.eclipse.xtext.builder,
  org.eclipse.core.resources,
+ org.eclipse.core.runtime,
+ org.eclipse.jdt.core,
  org.eclipse.pde.core,
+ org.eclipse.ui,
+ org.eclipse.ui.editors;bundle-version="3.14.300",
  org.eclipse.ui.forms,
- net.sourceforge.plantuml.eclipse
+ org.eclipse.ui.ide;bundle-version="3.18.500",
+ org.eclipse.xtend.lib,
+ org.eclipse.xtext.builder,
+ org.eclipse.xtext.ui,
+ org.eclipse.xtext.ui.codetemplates.ui,
+ org.eclipse.xtext.ui.shared
 Import-Package: org.apache.log4j,
  org.eclipse.xtext.ui.codemining;resolution:=optional
 Bundle-RequiredExecutionEnvironment: JavaSE-17
