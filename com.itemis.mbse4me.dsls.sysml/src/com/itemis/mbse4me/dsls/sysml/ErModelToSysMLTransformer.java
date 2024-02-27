@@ -1,7 +1,6 @@
 package com.itemis.mbse4me.dsls.sysml;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,29 +22,29 @@ import com.itemis.mbse4me.dsls.utils.UnicodeConstants;
 
 public class ErModelToSysMLTransformer implements IErModelToSysMLTransformer {
 
-	private List<String> transformationIssues = new ArrayList<>();
 	private List<ModelContainer> modelContainersToTransform;
 	private List<Requirement> requirementsToTransform;
-	private Model transformedModel;
 
-	public void transform(List<ModelContainer> modelsToTransform, List<Requirement> requirements, IProject modelingProject, String outputModelName, IProgressMonitor progressMonitor) throws IOException {
+	public Model transform(List<ModelContainer> modelsToTransform, List<Requirement> requirements, IProject modelingProject, String outputModelName, IProgressMonitor progressMonitor) throws IOException {
 		this.modelContainersToTransform = modelsToTransform;
 		this.requirementsToTransform = requirements;
 
 		progressMonitor.beginTask("Copying Cameo Profiles and creating models", 100);
-		transformedModel = CameoProfileUtils.createModelAndCopyProfiles(modelingProject, outputModelName);
+		Model transformedModel = CameoProfileUtils.createModelAndCopyProfiles(modelingProject, outputModelName);
 		progressMonitor.worked(20);
 		progressMonitor.setTaskName("Transforming model elements");
-		doTransform(modelContainersToTransform, progressMonitor);
+		doTransform(modelContainersToTransform, transformedModel, progressMonitor);
 		progressMonitor.worked(80);
 		progressMonitor. setTaskName("Saving SysML model");
 		final HashMap<Object, Object> saveOptions = new HashMap<Object, Object>();
 		saveOptions.put(Resource.OPTION_LINE_DELIMITER, Resource.OPTION_LINE_DELIMITER_UNSPECIFIED);
 		transformedModel.eResource().save(saveOptions);
 		progressMonitor.worked(100);
+
+		return transformedModel;
 	}
 
-	private void doTransform(List<ModelContainer> containers, IProgressMonitor monitor) {
+	private void doTransform(List<ModelContainer> containers, Model transformedModel, IProgressMonitor monitor) {
 		// first, collect all the elements from all model containers
 		List<Component> components = containers.stream().flatMap(c -> c.getComponents().stream()).toList();
 		List<Assembly> assemblies = containers.stream().flatMap(c -> c.getAssemblies().stream()).toList();
@@ -112,18 +111,6 @@ public class ErModelToSysMLTransformer implements IErModelToSysMLTransformer {
 				}
 			});
 		});
-	}
-
-	public Model getTransformedModel() {
-		return transformedModel;
-	}
-
-	public List<String> getTransformationIssues() {
-		return transformationIssues;
-	}
-
-	public List<ModelContainer> getModelContainersToTransform() {
-		return modelContainersToTransform;
 	}
 
 	private Package getOrCreateComponentsPackage(Model transformedModel) {

@@ -7,11 +7,13 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-SymbolicName: com.itemis.mbse4me.dsls.ui.tests; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: com.itemis.mbse4me.dsls,
+ com.itemis.mbse4me.dsls.sysml,
  com.itemis.mbse4me.dsls.tests,
  com.itemis.mbse4me.dsls.ui,
  net.sourceforge.plantuml.eclipse,
  org.eclipse.core.runtime,
  org.eclipse.ui.ide,
+ org.eclipse.uml2.uml,
  org.eclipse.ui.workbench;resolution:=optional,
  org.eclipse.xtext.common.types.ui,
  org.eclipse.xtext.testing,

@@ -19,5 +19,6 @@ Require-Bundle: com.google.inject,
  org.eclipse.emf.mwe.core,
  org.eclipse.jface,
  org.eclipse.osgi,
+ org.eclipse.uml2.uml,
  org.eclipse.ui.workbench,
  org.eclipse.xtext.ui
