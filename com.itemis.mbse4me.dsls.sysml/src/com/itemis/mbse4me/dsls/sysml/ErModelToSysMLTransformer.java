@@ -101,7 +101,7 @@ public class ErModelToSysMLTransformer implements IErModelToSysMLTransformer {
 			var createdProduct = productsPack.createOwnedClass(product.getName(), false);
 			CameoProfileUtils.applySysMLStereotype(createdProduct, "Block");
 			createdProduct.createOwnedAttribute("PLM_ID", null).setStringDefaultValue(product.getId());
-			var productPrice = product.getAssemblyUsages().stream().map(asssemblyUsage -> assembliesToComputedPrice.get(asssemblyUsage.getAssembly())).reduce((double) 0, (subtotal, price) -> subtotal + price);
+			var productPrice = product.getAssemblyUsages().stream().map(assemblyUsage -> assembliesToComputedPrice.get(assemblyUsage.getAssembly())).reduce((double) 0, (subtotal, price) -> subtotal + price);
 			createdProduct.createOwnedAttribute("Price", null).setStringDefaultValue(productPrice.toString());
 			// get the assemblies included in this product
 			product.getAssemblyUsages().stream().forEach(usedAssembly -> {
