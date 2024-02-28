@@ -46,18 +46,18 @@ public class ErModelToSysMLTransformer implements IErModelToSysMLTransformer {
 
 	private void doTransform(List<ModelContainer> containers, Model transformedModel, IProgressMonitor monitor) {
 		// first, collect all the elements from all model containers
-		List<Component> components = containers.stream().flatMap(c -> c.getComponents().stream()).toList();
-		List<Assembly> assemblies = containers.stream().flatMap(c -> c.getAssemblies().stream()).toList();
-		List<Product> products = containers.stream().flatMap(c -> c.getProducts().stream()).toList();
+		List<Component> components = containers.stream().flatMap(container -> container.getComponents().stream()).toList();
+		List<Assembly> assemblies = containers.stream().flatMap(container -> container.getAssemblies().stream()).toList();
+		List<Product> products = containers.stream().flatMap(container -> container.getProducts().stream()).toList();
 		// create package structure
 		var componentsPack = getOrCreateComponentsPackage(transformedModel);
 		var assembliesPack = getOrCreateAssembliesPackage(transformedModel);
 		var productsPack = getOrCreateProductsPackage(transformedModel);
 		var requirementsPack = transformedModel.createNestedPackage("Requirements");
 		monitor.setTaskName("Creating Requirements");
-		requirementsToTransform.stream().forEach(rs -> {
-			var reqId = rs.getNumber();
-			var reqText = rs.getText().replace("'''", "").trim();
+		requirementsToTransform.stream().forEach(requirement -> {
+			var reqId = requirement.getNumber();
+			var reqText = requirement.getText().replace("'''", "").trim();
 			var reqClass = requirementsPack.createOwnedClass(String.format("Requirement_%s", reqId), false);
 			reqClass.createOwnedAttribute("Requirement Text", null).setStringDefaultValue(reqText);
 			CameoProfileUtils.applySysMLStereotype(reqClass, "Block");
@@ -66,12 +66,12 @@ public class ErModelToSysMLTransformer implements IErModelToSysMLTransformer {
 		Map<Component, Class> componentsToSysmlBlocks = new HashMap<>();
 		Map<Assembly, Class> assembliesToSysmlBlocks = new HashMap<>();
 		Map<Assembly, Double> assembliesToComputedPrice = new HashMap<>();
-		components.forEach(c -> {
-			var createdComponent = componentsPack.createOwnedClass(c.getName(), false);
-			createdComponent.createOwnedAttribute("PLM_ID", null).setStringDefaultValue(c.getId());
-			createdComponent.createOwnedAttribute("Price", null).setStringDefaultValue(c.getPrice());
+		components.forEach(component -> {
+			var createdComponent = componentsPack.createOwnedClass(component.getName(), false);
+			createdComponent.createOwnedAttribute("PLM_ID", null).setStringDefaultValue(component.getId());
+			createdComponent.createOwnedAttribute("Price", null).setStringDefaultValue(component.getPrice());
 			CameoProfileUtils.applySysMLStereotype(createdComponent, "Block");
-			componentsToSysmlBlocks.put(c, createdComponent);
+			componentsToSysmlBlocks.put(component, createdComponent);
 		});
 		monitor.worked(40);
 		monitor.setTaskName("Creating assemblies");
@@ -86,10 +86,10 @@ public class ErModelToSysMLTransformer implements IErModelToSysMLTransformer {
 					createdAssembly.createUsage(sysmlComponent).createOwnedComment().setBody(usedComponent.getCount() + " Pcs");
 				}
 			});
-			var assemblyPrice = assembly.getComponentUsages().stream().map(cv -> {
-				var priceString = cv.getComponent().getPrice();
+			var assemblyPrice = assembly.getComponentUsages().stream().map(componentUsage -> {
+				var priceString = componentUsage.getComponent().getPrice();
 				priceString = priceString.replace(UnicodeConstants.EURO_SYMBOL, "");
-				return Double.parseDouble(priceString) * cv.getCount();
+				return Double.parseDouble(priceString) * componentUsage.getCount();
 			}).reduce((double) 0, (subtotal, price) -> subtotal + price);
 			assembliesToComputedPrice.put(assembly, assemblyPrice);
 			createdAssembly.createOwnedAttribute("Price", null).setStringDefaultValue(assemblyPrice.toString());
@@ -97,14 +97,14 @@ public class ErModelToSysMLTransformer implements IErModelToSysMLTransformer {
 		});
 		monitor.worked(60);
 		monitor.setTaskName("Creating products");
-		products.forEach(r -> {
-			var createdProduct = productsPack.createOwnedClass(r.getName(), false);
+		products.forEach(product -> {
+			var createdProduct = productsPack.createOwnedClass(product.getName(), false);
 			CameoProfileUtils.applySysMLStereotype(createdProduct, "Block");
-			createdProduct.createOwnedAttribute("PLM_ID", null).setStringDefaultValue(r.getId());
-			var productPrice = r.getAssemblyUsages().stream().map(bgv -> assembliesToComputedPrice.get(bgv.getAssembly())).reduce((double) 0, (subtotal, price) -> subtotal + price);
+			createdProduct.createOwnedAttribute("PLM_ID", null).setStringDefaultValue(product.getId());
+			var productPrice = product.getAssemblyUsages().stream().map(asssemblyUsage -> assembliesToComputedPrice.get(asssemblyUsage.getAssembly())).reduce((double) 0, (subtotal, price) -> subtotal + price);
 			createdProduct.createOwnedAttribute("Price", null).setStringDefaultValue(productPrice.toString());
 			// get the assemblies included in this product
-			r.getAssemblyUsages().stream().forEach(usedAssembly -> {
+			product.getAssemblyUsages().stream().forEach(usedAssembly -> {
 				var sysmlAssembly = assembliesToSysmlBlocks.get(usedAssembly.getAssembly());
 				if (sysmlAssembly != null) {
 					createdProduct.createUsage(sysmlAssembly).createOwnedComment().setBody(usedAssembly.getCount() + " Pcs");
