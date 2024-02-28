@@ -98,16 +98,16 @@ public class ErModelToSysMLTransformer implements IErModelToSysMLTransformer {
 		monitor.worked(60);
 		monitor.setTaskName("Creating products");
 		products.forEach(r -> {
-			var createdTrack = productsPack.createOwnedClass(r.getName(), false);
-			CameoProfileUtils.applySysMLStereotype(createdTrack, "Block");
-			createdTrack.createOwnedAttribute("PLM_ID", null).setStringDefaultValue(r.getId());
-			var trackPrice = r.getAssemblyUsages().stream().map(bgv -> assembliesToComputedPrice.get(bgv.getAssembly())).reduce((double) 0, (subtotal, price) -> subtotal + price);
-			createdTrack.createOwnedAttribute("Price", null).setStringDefaultValue(trackPrice.toString());
+			var createdProduct = productsPack.createOwnedClass(r.getName(), false);
+			CameoProfileUtils.applySysMLStereotype(createdProduct, "Block");
+			createdProduct.createOwnedAttribute("PLM_ID", null).setStringDefaultValue(r.getId());
+			var productPrice = r.getAssemblyUsages().stream().map(bgv -> assembliesToComputedPrice.get(bgv.getAssembly())).reduce((double) 0, (subtotal, price) -> subtotal + price);
+			createdProduct.createOwnedAttribute("Price", null).setStringDefaultValue(productPrice.toString());
 			// get the assemblies included in this product
 			r.getAssemblyUsages().stream().forEach(usedAssembly -> {
 				var sysmlAssembly = assembliesToSysmlBlocks.get(usedAssembly.getAssembly());
 				if (sysmlAssembly != null) {
-					createdTrack.createUsage(sysmlAssembly).createOwnedComment().setBody(usedAssembly.getCount() + " Pcs");
+					createdProduct.createUsage(sysmlAssembly).createOwnedComment().setBody(usedAssembly.getCount() + " Pcs");
 				}
 			});
 		});
