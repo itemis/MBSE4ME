@@ -106,7 +106,7 @@ class ErModelToSysMLTransformerTest {
 					<Property> PLM_ID
 						<Literal String> 11111111 1
 					<Property> Price
-						<Literal String> 1.11
+						<Literal String> 1.11€
 				<Usage> 'ASSEMBLY 1' uses 1 Pcs of 'COMPONENT - 1'
 			<Package> Products
 		''')
@@ -142,7 +142,7 @@ class ErModelToSysMLTransformerTest {
 					<Property> PLM_ID
 						<Literal String> 11111111 1
 					<Property> Price
-						<Literal String> 5.550000000000001
+						<Literal String> 5.55€
 				<Usage> 'ASSEMBLY 1' uses 1 Pcs of 'COMPONENT - 1'
 				<Usage> 'ASSEMBLY 1' uses 2 Pcs of 'COMPONENT - 2'
 			<Package> Products
@@ -181,14 +181,14 @@ class ErModelToSysMLTransformerTest {
 					<Property> PLM_ID
 						<Literal String> 11111111 1
 					<Property> Price
-						<Literal String> 1.11
+						<Literal String> 1.11€
 				<Usage> 'ASSEMBLY 1' uses 1 Pcs of 'COMPONENT - 1'
 			<Package> Products
 				<<Block>> <Class> Product 1
 					<Property> PLM_ID
 						<Literal String> 22222222 1
 					<Property> Price
-						<Literal String> 1.11
+						<Literal String> 1.11€
 				<Usage> 'Product 1' uses 1 Pcs of 'ASSEMBLY 1'
 		''')
 	}
@@ -250,7 +250,7 @@ class ErModelToSysMLTransformerTest {
 					<Property> PLM_ID
 						<Literal String> 11111111 1
 					<Property> Price
-						<Literal String> 5.550000000000001
+						<Literal String> 5.55€
 				<Usage> 'ASSEMBLY 1' uses 1 Pcs of 'COMPONENT - 1'
 				<Usage> 'ASSEMBLY 1' uses 2 Pcs of 'COMPONENT - 2'
 				<Usage> 'ASSEMBLY 2' uses 3 Pcs of 'COMPONENT - 2'
@@ -261,7 +261,7 @@ class ErModelToSysMLTransformerTest {
 					<Property> PLM_ID
 						<Literal String> 11111111 2
 					<Property> Price
-						<Literal String> 19.98
+						<Literal String> 19.98€
 				<Usage> 'ASSEMBLY 1' uses 1 Pcs of 'COMPONENT - 1'
 				<Usage> 'ASSEMBLY 1' uses 2 Pcs of 'COMPONENT - 2'
 				<Usage> 'ASSEMBLY 2' uses 3 Pcs of 'COMPONENT - 2'
@@ -272,7 +272,7 @@ class ErModelToSysMLTransformerTest {
 					<Property> PLM_ID
 						<Literal String> 11111111 3
 					<Property> Price
-						<Literal String> 43.29
+						<Literal String> 43.29€
 				<Usage> 'ASSEMBLY 1' uses 1 Pcs of 'COMPONENT - 1'
 				<Usage> 'ASSEMBLY 1' uses 2 Pcs of 'COMPONENT - 2'
 				<Usage> 'ASSEMBLY 2' uses 3 Pcs of 'COMPONENT - 2'
@@ -284,7 +284,7 @@ class ErModelToSysMLTransformerTest {
 					<Property> PLM_ID
 						<Literal String> 22222222 1
 					<Property> Price
-						<Literal String> 25.53
+						<Literal String> 25.53€
 				<Usage> 'Product 1' uses 1 Pcs of 'ASSEMBLY 1'
 				<Usage> 'Product 1' uses 1 Pcs of 'ASSEMBLY 2'
 				<Usage> 'Product 2' uses 1 Pcs of 'ASSEMBLY 2'
@@ -293,7 +293,7 @@ class ErModelToSysMLTransformerTest {
 					<Property> PLM_ID
 						<Literal String> 22222222 2
 					<Property> Price
-						<Literal String> 63.269999999999996
+						<Literal String> 63.27€
 				<Usage> 'Product 1' uses 1 Pcs of 'ASSEMBLY 1'
 				<Usage> 'Product 1' uses 1 Pcs of 'ASSEMBLY 2'
 				<Usage> 'Product 2' uses 1 Pcs of 'ASSEMBLY 2'

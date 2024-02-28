@@ -1,6 +1,8 @@
 package com.itemis.mbse4me.dsls.sysml;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -91,8 +93,9 @@ public class ErModelToSysMLTransformer implements IErModelToSysMLTransformer {
 				priceString = priceString.replace(UnicodeConstants.EURO_SYMBOL, "");
 				return Double.parseDouble(priceString) * componentUsage.getCount();
 			}).reduce((double) 0, (subtotal, price) -> subtotal + price);
+			assemblyPrice = round(assemblyPrice);
 			assembliesToComputedPrice.put(assembly, assemblyPrice);
-			createdAssembly.createOwnedAttribute("Price", null).setStringDefaultValue(assemblyPrice.toString());
+			createdAssembly.createOwnedAttribute("Price", null).setStringDefaultValue(assemblyPrice.toString() + UnicodeConstants.EURO_SYMBOL);
 			assembliesToSysmlBlocks.put(assembly, createdAssembly);
 		});
 		monitor.worked(60);
@@ -102,7 +105,8 @@ public class ErModelToSysMLTransformer implements IErModelToSysMLTransformer {
 			CameoProfileUtils.applySysMLStereotype(createdProduct, "Block");
 			createdProduct.createOwnedAttribute("PLM_ID", null).setStringDefaultValue(product.getId());
 			var productPrice = product.getAssemblyUsages().stream().map(assemblyUsage -> assembliesToComputedPrice.get(assemblyUsage.getAssembly())).reduce((double) 0, (subtotal, price) -> subtotal + price);
-			createdProduct.createOwnedAttribute("Price", null).setStringDefaultValue(productPrice.toString());
+			productPrice = round(productPrice);
+			createdProduct.createOwnedAttribute("Price", null).setStringDefaultValue(productPrice.toString() + UnicodeConstants.EURO_SYMBOL);
 			// get the assemblies included in this product
 			product.getAssemblyUsages().stream().forEach(usedAssembly -> {
 				var sysmlAssembly = assembliesToSysmlBlocks.get(usedAssembly.getAssembly());
@@ -126,5 +130,11 @@ public class ErModelToSysMLTransformer implements IErModelToSysMLTransformer {
 	private Package getOrCreateProductsPackage(Model transformedModel) {
 		var pack = transformedModel.getNestedPackage(TransformedModelConstants.PRODUCTS_PACKAGE);
 		return pack != null ? pack : transformedModel.createNestedPackage(TransformedModelConstants.PRODUCTS_PACKAGE);
+	}
+
+	private double round(double value) {
+	    BigDecimal bigDeciaml = new BigDecimal(Double.toString(value));
+	    bigDeciaml = bigDeciaml.setScale(2, RoundingMode.HALF_UP);
+	    return bigDeciaml.doubleValue();
 	}
 }
