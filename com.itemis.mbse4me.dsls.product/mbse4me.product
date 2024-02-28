@@ -5,7 +5,7 @@
 
    <aboutInfo>
       <text>
-         Version 0.0.0.20231020
+         Version 0.0.0.20240228
       </text>
    </aboutInfo>
 
@@ -28,6 +28,7 @@
          <bmp/>
       </win>
    </launcher>
+
 
    <vm>
       <windows include="true">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17</windows>
