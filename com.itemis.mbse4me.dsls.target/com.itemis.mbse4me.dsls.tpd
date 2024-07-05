@@ -1,6 +1,6 @@
 /*
  * This target definition platform is created with: Target Platform Definition DSL and Generator
- * It can be installed from: https://download.eclipse.org/cbi/tpd/3.0.0-SNAPSHOT/
+ * It can be installed from: https://download.eclipse.org/cbi/updates/tpd/release/3.0.0
  */
 target "com.itemis.mbse4me.dsls" with source requirements
 
