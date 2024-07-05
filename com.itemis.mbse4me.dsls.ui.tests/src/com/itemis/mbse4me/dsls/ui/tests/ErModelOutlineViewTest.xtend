@@ -3,7 +3,6 @@ package com.itemis.mbse4me.dsls.ui.tests
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.extensions.InjectionExtension
 import org.eclipse.xtext.ui.testing.AbstractOutlineTest
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.^extension.ExtendWith
 
@@ -13,11 +12,6 @@ import org.junit.jupiter.api.^extension.ExtendWith
 @ExtendWith(InjectionExtension)
 @InjectWith(ErModelUiInjectorProvider)
 class ErModelOutlineViewTest extends AbstractOutlineTest {
-
-	@BeforeEach
-	override void setUp() {
-		super.setUp
-	}
 
 	@Test def test001() {
 		'''
