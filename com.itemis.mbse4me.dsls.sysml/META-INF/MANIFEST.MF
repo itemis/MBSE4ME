@@ -11,7 +11,7 @@ Require-Bundle: com.itemis.mbse4me.dsls,
  org.eclipse.uml2;bundle-version="5.5.2"
 Bundle-Vendor: ITEMIS
 Automatic-Module-Name: com.itemis.mbse4me.dsls.sysml
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Import-Package: org.eclipse.uml2.ant,
  org.eclipse.uml2.ant.app,
  org.eclipse.uml2.ant.taskdefs,

@@ -4,7 +4,7 @@ Bundle-Name: Product
 Bundle-SymbolicName: com.itemis.mbse4me.dsls.product;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Automatic-Module-Name: com.itemis.mbse4me.dsls.product
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Require-Bundle: com.itemis.mbse4me.dsls.dot;bundle-version="1.0.0",
  com.itemis.mbse4me.dsls;bundle-version="1.0.0",
  com.itemis.mbse4me.dsls.ide;bundle-version="1.0.0",

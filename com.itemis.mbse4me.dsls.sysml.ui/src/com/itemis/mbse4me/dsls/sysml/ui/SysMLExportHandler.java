@@ -3,7 +3,7 @@ package com.itemis.mbse4me.dsls.sysml.ui;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Named;
+import com.google.inject.name.Named;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;

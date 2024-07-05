@@ -7,7 +7,7 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-SymbolicName: com.itemis.mbse4me.dsls; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
- org.apache.commons.collections4;bundle-version="4.4.0",
+ org.apache.commons.commons-collections4;bundle-version="4.4.0",
  org.apache.commons.compress;bundle-version="1.21.0",
  org.apache.poi.ooxml.schemas;bundle-version="4.1.1",
  org.apache.poi.ooxml;visibility:=reexport,
@@ -20,7 +20,7 @@ Require-Bundle: org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.eclipse.xtext.util,
  org.eclipse.xtext.xbase,
  org.eclipse.xtext.xbase.lib;bundle-version="2.14.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: com.itemis.mbse4me.dsls,
  com.itemis.mbse4me.dsls.erModel,
  com.itemis.mbse4me.dsls.erModel.impl,

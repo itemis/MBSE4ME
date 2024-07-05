@@ -4,26 +4,21 @@
  */
 target "com.itemis.mbse4me.dsls" with source requirements
 
-location "https://ftp-stud.hs-esslingen.de/Mirrors/eclipse/justj/jres/17/updates/release" {
-	org.eclipse.justj.openjdk.hotspot.jre.full.feature.group
+location "https://download.eclipse.org/releases/2024-06/" {
+	org.eclipse.sdk.feature.group
+	org.eclipse.uml2.sdk.feature.group
 }
 
-// Esslingen mirror is much faster than eclipse.org!
-location eclipse "https://ftp-stud.hs-esslingen.de/Mirrors/eclipse/releases/2023-09/202309131000/" {
-	org.eclipse.emf.feature.group
-	org.eclipse.emf.sdk.feature.group
-	org.eclipse.emf.ecore
-	org.eclipse.sdk.ide
-	org.eclipse.uml2.sdk.feature.group
+location "https://download.eclipse.org/modeling/emft/mwe/updates/releases/2.18.0/" {
+	org.eclipse.emf.mwe2.language.sdk.feature.group
+}
+
+location "https://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.35.0/" {
 	org.eclipse.xtext.sdk.feature.group
 	org.eclipse.xtend.sdk.feature.group
 }
 
 location eclipse-orbit "https://download.eclipse.org/tools/orbit/downloads/drops/R20230531010532/repository" {
-	// let's add guava here, all other dependencies are automatically loaded via planner
-	com.google.guava
-	com.google.inject
-	com.google.gson
 	org.apache.commons.compress
 	org.apache.poi
 	org.apache.poi.ooxml
@@ -31,15 +26,6 @@ location eclipse-orbit "https://download.eclipse.org/tools/orbit/downloads/drops
 	org.apache.xmlbeans
 }
 
-location equinoxexecutable "https://ftp-stud.hs-esslingen.de/Mirrors/eclipse/eclipse/updates/4.29/" {
-	org.eclipse.equinox.executable.feature.group
-}
-
 location "http://hallvard.github.io/plantuml/" {
-	net.sourceforge.plantuml.ecore.feature.feature.group
-	net.sourceforge.plantuml.feature.feature.group
 	net.sourceforge.plantuml.eclipse
-	net.sourceforge.plantuml.lib.feature.feature.group
-	net.sourceforge.plantuml.lib.elk.feature.feature.group
-	net.sourceforge.plantuml.jdt
 }
